@@ -14,6 +14,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import { link } from 'fs';
 
 const drawerWidth = 260;
 
@@ -75,7 +76,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function Navbar() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -84,6 +85,34 @@ export default function Navbar() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const NAVIGATION = [
+    {
+        text: 'Dashboard',
+        icon: <InboxIcon />,
+        link: '/'
+    },
+    {
+        text: 'Simulation',
+        icon: <MailIcon />,
+        link: '/simulation'
+    },
+    {
+        text: 'Policy & Data Insight',
+        icon: <InboxIcon />,
+        link: '/policy'
+    },
+    {
+        text: 'Patient Allocation',
+        icon: <MailIcon />,
+        link: '/patient'
+    },
+    {
+        text: 'Feedback Form',
+        icon: <InboxIcon />,
+        link: '/feedback'
+    },
+  ]
 
   return (
       <Drawer variant="permanent" open={open}>
@@ -94,7 +123,7 @@ export default function Navbar() {
           </DrawerHeader>
           <Divider />
           <List>
-              {['Dashboard', 'Simulation', 'Policy & Data Insight', 'Patient Allocation', 'Feedback Form'].map((text, index) => (
+              {NAVIGATION.map(({ text, icon, link }) => (
                   <ListItem className='px-2 py-1' key={text} disablePadding sx={{ display: 'block' }}>
                       <ListItemButton
                           className='bg-secondary hover:bg-secondary/50 rounded'
@@ -110,6 +139,8 @@ export default function Navbar() {
                                       justifyContent: 'center',
                                   },
                           ]}
+                          LinkComponent={'a'}
+                          href={link}
                       >
                           <ListItemIcon
                               sx={[
@@ -126,7 +157,7 @@ export default function Navbar() {
                                       },
                               ]}
                           >
-                              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                            {icon}
                           </ListItemIcon>
                           <ListItemText
                               primary={text}
@@ -138,6 +169,11 @@ export default function Navbar() {
                                       : {
                                           opacity: 0,
                                       },
+                                    {
+                                        '& .MuiTypography-root': {
+                                            fontWeight: 700
+                                        }
+                                    }
                               ]}
                           />
                       </ListItemButton>
