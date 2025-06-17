@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from "./_components/Navbar";
+import { Box } from '@mui/material';
 
 export default function MainLayout({
     children,
@@ -7,9 +8,11 @@ export default function MainLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <main className="flex flex-col min-h-screen">
+        <Box sx={{ display: 'flex', minHeight: '100vh' }}>
             <Navbar />
-            {children}
-        </main>
+            <Box component="main" sx={{ flexGrow: 1, padding: 3 }}> 
+                {children}
+            </Box>
+        </Box>
     )
 }
