@@ -42,7 +42,7 @@ const closedMixin = (theme: Theme): CSSObject => ({
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'flex-end',
+  justifyContent: 'space-between',
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
@@ -117,6 +117,9 @@ export default function Navbar() {
   return (
       <Drawer variant="permanent" open={open}>
           <DrawerHeader>
+              { open && (
+                <img src="/logo-full.png" alt="HospitalIQ Logo" className='h-[80%]'/>
+              )}
               <IconButton onClick={open ? handleDrawerClose : handleDrawerOpen}>
                   {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
               </IconButton>
