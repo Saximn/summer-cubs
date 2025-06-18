@@ -10,7 +10,7 @@ export default function MainLayout({
     return (
         <Box sx={{ display: 'flex', minHeight: '100vh' }}>
             <Navbar />
-            <Box component="main" sx={{ flexGrow: 1, padding: 3 }}> 
+            <Box component="main" sx={{ flexGrow: 1, padding: 3, alignItems: 'center', justifyContent: 'center', display: 'flex' }}> 
                 {children}
             </Box>
         </Box>
