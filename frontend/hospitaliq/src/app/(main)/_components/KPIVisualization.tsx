@@ -29,7 +29,7 @@ export default function KPIVisualization() {
             yAxis={[
                 {
                 width: 50,
-                valueFormatter: (value) => `${value}%`
+                valueFormatter: (value: number) => `${value}%`
                 }
             ]}
             margin={margin}
