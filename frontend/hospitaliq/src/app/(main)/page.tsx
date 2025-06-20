@@ -1,55 +1,120 @@
 'use client';
-import { Box, Grid, Stack } from '@mui/material';
+import { Box, Grid, Stack, List, ListItem, ListItemText } from '@mui/material';
 
 
 import React from 'react';
+import AddPatient from './_components/AddPatient';
+import CustomCard from './_components/CustomCard';
+import RoomAvailability from './_components/RoomAvailability';
+import IotAlerts from './_components/IotAlerts';
+import KPIVisualization from './_components/KPIVisualization';
 
-interface CardProps extends React.PropsWithChildren<{}> {
-  className?: string;
-}
-
-const Card: React.FC<CardProps> = ({ children, className }) => (
-  <Box
-    className={className}
-    sx={{
-      backgroundColor: 'white',
-      borderRadius: '10px',
-      padding: '16px',
-      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-      height: '100%',
-      width: '100%',
-    }}
-  >
-    {children}
-  </Box>
-)
 
 export default function Home() {
+  const formatTime = (num: number) => num.toString().padStart(2, '0');
+  const [time, setTime] = React.useState({
+    hours: 0,
+    minutes: 30,
+    seconds: 0,
+  });
   return (
-    <Box className="bg-primary rounded flex items-center justify-center h-[90%] w-[90%] p-6">
+    <Box className="bg-primary rounded flex items-center justify-center h-[90vh] w-[90%] p-6">
       <Grid className="w-full h-full" container spacing={3}>
-        <Grid size={8}>
+        <Grid className="h-full" size={8}>
           <Stack spacing={3} className='h-full w-full'>
             <Stack direction='row' spacing={3} className='h-full w-full'>
-              <Card className='flex flex-col gap-3'>
+              <CustomCard className='flex flex-col gap-3'>
                 <h6 className='font-bold'>Patients: 15</h6>
-                <Card className='bg-primary flex-1'>
-
-                </Card>
-              </Card>
-              <Card>Test 2</Card>
+                <AddPatient />
+              </CustomCard>
+              <CustomCard>
+                <RoomAvailability />
+              </CustomCard>
             </Stack>
-            <Card>Test</Card>
+            <CustomCard className='min-h-0 flex flex-col'>
+              <h6 className='font-bold'>KPI Visualization</h6>
+              <KPIVisualization />
+            </CustomCard>
           </Stack>
         </Grid>
-        <Grid size={4}>
+        <Grid className='h-full' size={4}>
           <Stack spacing={3} className='h-full w-full'>
-            <Card>Test</Card>
-            <Card>Test</Card>
-            <Card>Test</Card>
-          </Stack>
-        </Grid>
+            <CustomCard className='min-h-0 flex flex-col'>
+              <h6 className='font-bold'>Staff Availability: 24</h6>
+                <List
+                sx={{
+                  width: '100%',
+                  maxWidth: 360,
+                  bgcolor: 'background.paper',
+                  overflow: 'auto',
+                  flex: 1,
+                  minHeight: 0,
+                  listStyleType: 'decimal',
+                  pl: 3,
+                }}
+                component="ol"
+                dense
+                >
+                {
+                  Array.from({ length: 10 }, (_, index) => (
+                  <ListItem
+                    key={index}
+                    sx={{ display: 'list-item', pl: 1 }}
+                  >
+                    <ListItemText sx={{
+                      '.MuiTypography-root': {
+                        fontWeight: 'bold',
+                      }
+                    }} >Staff Member {index + 1}</ListItemText>
+                  </ListItem>
+                  ))
+                }
+                </List>
+
+            </CustomCard>
+            <CustomCard className='min-h-0 flex flex-col'>
+              <h6 className='font-bold'>Queue Time: 30 minutes</h6>
+              <div className="flex flex-1 justify-center items-center gap-3">
+              {/* Hours */}
+              <div className="text-center">
+                <div className="bg-cyan-400 text-white rounded-xl p-4 min-w-20 shadow-lg">
+                  <div className="text-4xl font-bold leading-none">
+                    {formatTime(time.hours)}
+                  </div>
+                </div>
+                <div className="text-xs text-gray-500 mt-2">Hours</div>
+              </div>
+            
+              
+              {/* Minutes */}
+              <div className="text-center">
+                <div className="bg-cyan-400 text-white rounded-xl p-4 min-w-20 shadow-lg">
+                  <div className="text-4xl font-bold leading-none">
+                    {formatTime(time.minutes)}
+                  </div>
+                </div>
+                <div className="text-xs text-gray-500 mt-2">Minutes</div>
+              </div>
+              
+              
+              {/* Seconds */}
+              <div className="text-center">
+                <div className="bg-cyan-400 text-white rounded-xl p-4 min-w-20 shadow-lg">
+                  <div className="text-4xl font-bold leading-none">
+                    {formatTime(time.seconds)}
+                  </div>
+                </div>
+                <div className="text-xs text-gray-500 mt-2">Seconds</div>
+              </div>
+            </div>
+          </CustomCard>
+          <CustomCard className='min-h-0 flex flex-col'>
+            <h6 className='font-bold'>IoT Alerts</h6>
+            <IotAlerts />
+          </CustomCard>
+        </Stack>
       </Grid>
-    </Box>
+    </Grid>
+    </Box >
   );
 }
