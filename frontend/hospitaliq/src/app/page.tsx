@@ -28,7 +28,7 @@ const page = () => {
           placeholder='password'
           variant="outlined"
         />
-        <a href="/dashboard" label="dashboard">
+        <a href="/dashboard">
         <Button className="bg-white rounded-full font-bold text-xs p-3 w-30 ml-45 text-blue-950" variant="contained">Login</Button></a>
         
       </Stack>
