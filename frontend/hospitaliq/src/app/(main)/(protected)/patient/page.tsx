@@ -10,7 +10,7 @@ export default function PatientPage() {
     return (
         <Box className="bg-primary rounded flex items-center justify-center h-[90vh] w-[90%] p-6">
             <Grid className="w-full h-full" container spacing={3}>
-                <Grid size={6} className="h-full">
+                <Grid size={6} className="flex flex-col h-full">
                     <h6 className="text-white text-2xl font-bold mb-4">Patient List</h6>
                     <PatientList selectedPatient={selectedPatient} setSelectedPatient={setSelectedPatient} />
                 </Grid>
