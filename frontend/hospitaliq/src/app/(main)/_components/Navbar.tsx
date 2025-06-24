@@ -90,7 +90,7 @@ export default function Navbar() {
     {
         text: 'Dashboard',
         icon: <InboxIcon />,
-        link: '/'
+        link: '/dashboard'
     },
     {
         text: 'Simulation',
