@@ -1,6 +1,11 @@
+import datetime
+import uuid
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
+
+
 
 # Create your models here.
 class CustomUserManager(BaseUserManager):
@@ -19,13 +24,53 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 class CustomUser(AbstractUser):
+    ROLES = [
+        ('admin', 'Admin')
+        ('medical_staff', 'Medical Staff'),
+        ('patient', 'Patient'),
+    ]
+    
     email = models.EmailField(max_length=20, unique=True)
     birthday = models.DateField(null=True, blank=True)
     username = models.CharField(max_length=200, null=True, blank=True)
+    role = models.CharField(max_length=30, choice=ROLES, default="patient")
     
     objects = CustomUserManager()
     
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+class Room(models.Model):
+    room_number = models.CharField(max_length=10, unique=True)
+    capacity = models.IntegerField(default=1)
+    floor = models.IntegerField(null=True, blank=True)
+    
+    def str(self):
+        return f"Room {self.room_number} (Capacity: {self.capacity})"
+    
+class MedicalStaff(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=200)
+    dob = models.DateField(blank=True)
+    role = models.CharField(max_length=50, null=True, blank=True)
+    
+class Patient(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=200)
+    dob = models.DateField()
+    
+class PatientEntry(models.Model):
+    SEVERITY_LEVEL = [
+        ('green', 'Green'),
+        ('yellow', 'Yellow'),
+        ('red', 'Red')
+    ]
+    patient = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    assigned_staff = models.ManyToManyField(MedicalStaff, on_delete=models.CASCADE)
+    assigned_room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True)
+    severity = models.CharField(max_length=10, choice=SEVERITY_LEVEL, default="green")
+    entry_time = models.DateTimeField(default=datetime.now)
+    exit_time = models.DateTimeField(blank=True, null=True)
+    completed = models.BooleanField(default=False)
+    
 
