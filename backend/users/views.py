@@ -11,6 +11,13 @@ from .models import *
 
 User = get_user_model()
 
+class UserMeView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        serializer = RegisterSerializer(request.user)
+        return Response(serializer.data)
+
 # Create your views here.
 class RegisterViewset(viewsets.ViewSet):
   permission_classes = [permissions.AllowAny]
@@ -40,8 +47,9 @@ class LoginViewset(viewsets.ViewSet):
                 _, token=AuthToken.objects.create(user)
                 return Response(
                 {
-                    "user": self.serializer_class(user).data,
-                    "token": token
+                    "user": UserSerializer(user).data,
+                    "token": token,
+
                 }
                 )
             else:

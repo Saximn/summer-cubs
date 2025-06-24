@@ -61,11 +61,20 @@ export default function Home() {
                     key={index}
                     sx={{ display: 'list-item', pl: 1 }}
                   >
+                    <Box className='flex flex-row justify-between w-full'>
+                      
                     <ListItemText sx={{
                       '.MuiTypography-root': {
                         fontWeight: 'bold',
                       }
                     }} >Staff Member {index + 1}</ListItemText>
+                    <ListItemText sx={{
+                      '.MuiTypography-root': {
+                        fontWeight: 'normal',
+                        textAlign: 'right',
+                      }
+                    }} >Available</ListItemText>
+                    </Box>
                   </ListItem>
                   ))
                 }
