@@ -101,6 +101,6 @@ class RoomViewset(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 class PatientViewset(viewsets.ModelViewSet):
-    permission_classes = [permissions.AllowAny]  
+    permission_classes = [permissions.IsAuthenticated]  
     quertset = Patient.objects.all()
     serializer_class = PatientSerializer
