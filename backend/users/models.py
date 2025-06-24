@@ -25,7 +25,7 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractUser):
     ROLES = [
-        ('admin', 'Admin')
+        ('admin', 'Admin'),
         ('medical_staff', 'Medical Staff'),
         ('patient', 'Patient'),
     ]
@@ -33,7 +33,7 @@ class CustomUser(AbstractUser):
     email = models.EmailField(max_length=20, unique=True)
     birthday = models.DateField(null=True, blank=True)
     username = models.CharField(max_length=200, null=True, blank=True)
-    role = models.CharField(max_length=30, choice=ROLES, default="patient")
+    role = models.CharField(max_length=30, choices=ROLES, default="patient")
     
     objects = CustomUserManager()
     
@@ -65,11 +65,11 @@ class PatientEntry(models.Model):
         ('yellow', 'Yellow'),
         ('red', 'Red')
     ]
-    patient = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    assigned_staff = models.ManyToManyField(MedicalStaff, on_delete=models.CASCADE)
-    assigned_room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True)
-    severity = models.CharField(max_length=10, choice=SEVERITY_LEVEL, default="green")
-    entry_time = models.DateTimeField(default=datetime.now)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    assigned_staff = models.ManyToManyField(MedicalStaff)
+    assigned_room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True, blank=True)
+    severity = models.CharField(max_length=10, choices=SEVERITY_LEVEL, default="green")
+    entry_time = models.DateTimeField(auto_now_add=True)
     exit_time = models.DateTimeField(blank=True, null=True)
     completed = models.BooleanField(default=False)
     
