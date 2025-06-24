@@ -17,7 +17,7 @@ export default function PolicyPage() {
                             { title: "IoT Vital", subtitle: "Low O₂ Sat (Bed 8)", time: "10:23:01" },
                             { title: "Staff Schedule", subtitle: "Nurse Lee - Break", time: "10:25:33" }
                         ].map((item, index) => (
-                            <Card key={index} className="flex flex-col gap-3 min-w-[300px]" color="white">
+                            <Card key={index} className="flex flex-col  min-w-[300px] gap-3" color="white">
                                 <h6 className="font-bold">{item.title}</h6>
                                 <Card className="bg-navy h-20" color="#313860">
                                     <Box sx={{ flexGrow: 1 }}>
