@@ -14,6 +14,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import { link } from 'fs';
 
 const drawerWidth = 260;
@@ -111,6 +112,11 @@ export default function Navbar() {
         text: 'Feedback Form',
         icon: <InboxIcon />,
         link: '/feedback'
+    },
+    {
+        text: 'Chatbot',
+        icon: <QuestionAnswerIcon />,
+        link: '/chatbot'
     },
   ]
 
