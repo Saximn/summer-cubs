@@ -24,3 +24,25 @@ class LoginSerializer(serializers.Serializer):
     ret.pop('password', None)
     return ret
 
+class PatientSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Patient
+    fields = ['id', 'name', 'dob']
+    
+class MedicalStaffSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = MedicalStaff
+    fields = ['id', 'name', 'dob', 'role']
+
+class PatientEntrySerializer(serializers.ModelSerializer):
+  class Meta:
+    model = PatientEntry
+    fields = [
+      'patient', 
+      'assigned_staff',
+      'assigned_room',
+      'serverity',
+      'entry_time',
+      'exit_time',
+      'completed'
+    ]
