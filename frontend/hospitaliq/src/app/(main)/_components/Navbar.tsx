@@ -128,6 +128,11 @@ export default function Navbar() {
       icon: <FeedbackIcon />,
       link: '/feedback'
     },
+    {
+        text: 'Chatbot',
+        icon: <QuestionAnswerIcon />,
+        link: '/chatbot'
+    },
   ]
 
   return (
