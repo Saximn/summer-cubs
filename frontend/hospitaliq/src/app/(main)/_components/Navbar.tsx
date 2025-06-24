@@ -18,6 +18,7 @@ import InsightsIcon from '@mui/icons-material/Insights';
 import PersonalInjuryIcon from '@mui/icons-material/PersonalInjury';
 import FeedbackIcon from '@mui/icons-material/Feedback';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import { Box, Menu, MenuItem } from '@mui/material';
 import { logoutAction } from '@/app/logout/actions';
 
