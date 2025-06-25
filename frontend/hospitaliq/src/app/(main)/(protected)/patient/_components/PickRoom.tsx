@@ -1,7 +1,7 @@
 import { Box, FormControl, Grid, InputLabel, MenuItem, Select, Typography, Tooltip } from '@mui/material';
 import React, { useState } from 'react';
 
-export default function PickRoom() {
+export default function PickRoom({ selectedPatient }: { selectedPatient: any }) {
 
     const [selectedFloor, setSelectedFloor] = useState(1);
     type RoomRows = string;
@@ -39,8 +39,6 @@ export default function PickRoom() {
     const floors = [1, 2, 3, 4, 5];
     const columns = [1, 2, 3, 4, 5, 6, 7];
     const rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
-
-    const roomsPerFloor = columns.length * rows.length;
 
     const currentFloorData = roomData[selectedFloor] || { availableCount: 0, rooms: {} };
 

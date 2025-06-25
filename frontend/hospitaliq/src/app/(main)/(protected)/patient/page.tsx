@@ -16,7 +16,7 @@ export default function PatientPage() {
                 </Grid>
                 <Grid size={6} className='h-full'>
                     <h6 className="text-white text-2xl font-bold mb-4">Slot</h6>
-                    <PickRoom />
+                    <PickRoom selectedPatient={selectedPatient} />
                 </Grid>
             </Grid>
         </Box>
