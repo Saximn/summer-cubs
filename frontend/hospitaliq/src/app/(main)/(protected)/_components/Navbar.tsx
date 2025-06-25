@@ -22,6 +22,7 @@ import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import { Box, Menu, MenuItem } from '@mui/material';
 import { logoutAction } from '@/app/logout/actions';
 import { getCurrentUser } from '@/lib/auth/getCurrentUser';
+import PersonIcon from '@mui/icons-material/Person';
 
 const drawerWidth = 260;
 
@@ -111,6 +112,11 @@ export default function Navbar({ user }: { user: any }) {
       link: '/dashboard'
     },
     {
+      text: 'Patient List',
+      icon: <PersonIcon />,
+      link: '/patient'
+    },
+    {
       text: 'Simulation',
       icon: <EngineeringIcon />,
       link: '/simulation'
@@ -123,7 +129,7 @@ export default function Navbar({ user }: { user: any }) {
     {
       text: 'Patient Allocation',
       icon: <PersonalInjuryIcon />,
-      link: '/patient'
+      link: '/allocation'
     },
     {
       text: 'Feedback Form',

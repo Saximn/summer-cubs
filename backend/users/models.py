@@ -5,6 +5,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
 
+from django.utils import timezone
+
 # Create your models here.
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -40,9 +42,12 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = []
 
 class Room(models.Model):
-    room_number = models.CharField(max_length=10, unique=True)
+    room_number = models.CharField(max_length=10)
     capacity = models.IntegerField(default=1)
     floor = models.IntegerField(null=True, blank=True)
+
+    class Meta:
+        unique_together = ('room_number', 'floor')
     
     def str(self):
         return f"Room {self.room_number} (Capacity: {self.capacity})"
@@ -60,15 +65,15 @@ class Patient(models.Model):
     
 class PatientEntry(models.Model):
     SEVERITY_LEVEL = [
-        ('green', 'Green'),
-        ('yellow', 'Yellow'),
-        ('red', 'Red')
+        ('low', 'Low'),
+        ('medium', 'Medium'),
+        ('high', 'High')
     ]
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    assigned_staff = models.ManyToManyField(MedicalStaff)
-    assigned_room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True, blank=True)
+    assigned_staff = models.ManyToManyField(MedicalStaff, blank=True)
+    assigned_room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True)
     severity = models.CharField(max_length=10, choices=SEVERITY_LEVEL, default="green")
-    entry_time = models.DateTimeField(auto_now_add=True)
+    entry_time = models.DateTimeField(default=timezone.now)
     exit_time = models.DateTimeField(blank=True, null=True)
     completed = models.BooleanField(default=False)
     

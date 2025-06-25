@@ -40,18 +40,36 @@ class MedicalStaffSerializer(serializers.ModelSerializer):
     fields = ['id', 'name', 'dob', 'role']
   
 class RoomSerializer(serializers.ModelSerializer):
+  current_occupants = serializers.SerializerMethodField()
   class Meta:
     model = Room
-    fields = ['room_number', 'capacity', 'floor']
+    fields = ['room_number', 'capacity', 'floor', 'current_occupants']
+
+  def get_current_occupants(self, obj):
+    entries = PatientEntry.objects.filter(assigned_room=obj, completed=False)
+    return [
+      {
+        'id': entry.patient.id,
+        'name': entry.patient.name
+      }
+      for entry in entries
+    ]
 
 class PatientEntrySerializer(serializers.ModelSerializer):
+  patient_name = serializers.CharField(source='patient.name', read_only=True)
+  room_number = serializers.CharField(source='assigned_room.room_number', read_only=True)
+  floor = serializers.IntegerField(source='assigned_room.floor', read_only=True)
+
   class Meta:
     model = PatientEntry
     fields = [
       'id',
       'patient', 
+      'patient_name',
       'assigned_staff',
       'assigned_room',
+      'room_number',
+      'floor',
       'severity',
       'entry_time',
       'exit_time',
