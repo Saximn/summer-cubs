@@ -57,3 +57,22 @@ class PatientEntrySerializer(serializers.ModelSerializer):
       'exit_time',
       'completed'
     ]
+
+class FeedbackSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Feedback
+    fields = [
+      'id',
+      'sender',
+      'content',
+    ]
+
+class FeedbackForStaffSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = FeedbackForStaff
+    fields = [
+      'id',
+      'sender',
+      'staff',
+      'content',
+    ]
