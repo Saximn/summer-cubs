@@ -73,4 +73,10 @@ class PatientEntry(models.Model):
     exit_time = models.DateTimeField(blank=True, null=True)
     completed = models.BooleanField(default=False)
     
+class Feedback(models.Model):
+    sender = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    content = models.CharField(max_length=3000)
 
+## OPTIONAL FEATURE ##
+class FeedbackForStaff(Feedback):
+    staff = models.ManyToManyField(MedicalStaff)
