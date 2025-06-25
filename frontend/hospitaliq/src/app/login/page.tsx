@@ -23,7 +23,7 @@ const LoginPage = () => {
       if (result.role === 'medical_staff') {
         router.push('/dashboard');
       } else {
-        router.push('/patient');
+        router.push('/chatbot');
       }
     }
   }
