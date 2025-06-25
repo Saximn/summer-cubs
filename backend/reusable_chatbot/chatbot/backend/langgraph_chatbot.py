@@ -60,7 +60,7 @@ class LangGraphChatbot:
         # Initialize components
         self._setup_database()
         self._setup_llm()
-        self._setup_vector_store()
+        self._setup_vector_store_optimized()  # Use optimized version
         self._setup_database_agent()
         self._setup_workflow()
     
@@ -91,6 +91,40 @@ class LangGraphChatbot:
         if specialties:
             add_texts_to_vector_store(self.vector_store, specialties)
     
+    def _setup_vector_store_optimized(self):
+        """Initialize vector store with smart caching to avoid re-embedding."""
+        # Initialize embeddings and vector store
+        self.embeddings = init_embeddings(self.embedding_model)
+        self.vector_store = init_vector_store(
+            name="medical_collection",
+            embeddings=self.embeddings,
+            directory=self.vector_store_dir
+        )
+        
+        # Check if vector store already has data
+        try:
+            # Try to search for something to see if data exists
+            test_results = self.vector_store.similarity_search("cardiology", k=1)
+            if test_results:
+                print(f"✅ Vector store already populated with {len(test_results)} items. Skipping re-embedding.")
+                return
+        except Exception:
+            print("🔄 Vector store empty or corrupted. Populating with fresh data...")
+        
+        # Only populate if empty or corrupted
+        skills = safe_query_as_list(self.db, "skills", "skill")
+        specialties = safe_query_as_list(self.db, "doctors", "specialty")
+        
+        if skills:
+            print(f"📝 Embedding {len(skills)} skills...")
+            add_texts_to_vector_store(self.vector_store, skills)
+        
+        if specialties:
+            print(f"📝 Embedding {len(specialties)} specialties...")
+            add_texts_to_vector_store(self.vector_store, specialties)
+        
+        print("✅ Vector store setup complete!")
+
     def _setup_database_agent(self):
         """Initialize the database agent with tools."""
         # Get SQL tools
@@ -306,18 +340,18 @@ if __name__ == "__main__":
     bot = LangGraphChatbot()
     
     # Test different types of queries
-    # test_queries = [
-    #     "Hello, how are you?",
-    #     "How many doctors specialize in cardiology?",
-    #     "What is hypertension?",
-    #     "List all available specialties",
-    #     "Thanks for your help!"
-    # ]
+    test_queries = [
+        "Hello, how are you?",
+        "How many doctors specialize in cardiology?",
+        "What is hypertension?",
+        "List all available specialties",
+        "Thanks for your help!"
+    ]
     
-    # for query in test_queries:
-    #     print(f"\n{'='*50}")
-    #     print(f"Query: {query}")
-    #     print(f"Response: {bot.ask(query)}")
+    for query in test_queries:
+        print(f"\n{'='*50}")
+        print(f"Query: {query}")
+        print(f"Response: {bot.ask(query)}")
     
     # Uncomment for interactive mode
-    bot.chat_interactive()
+    # bot.chat_interactive()
