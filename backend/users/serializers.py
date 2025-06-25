@@ -38,15 +38,21 @@ class MedicalStaffSerializer(serializers.ModelSerializer):
   class Meta:
     model = MedicalStaff
     fields = ['id', 'name', 'dob', 'role']
+  
+class RoomSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Room
+    fields = ['room_number', 'capacity', 'floor']
 
 class PatientEntrySerializer(serializers.ModelSerializer):
   class Meta:
     model = PatientEntry
     fields = [
+      'id',
       'patient', 
       'assigned_staff',
       'assigned_room',
-      'serverity',
+      'severity',
       'entry_time',
       'exit_time',
       'completed'

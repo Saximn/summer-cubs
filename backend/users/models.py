@@ -66,11 +66,11 @@ class PatientEntry(models.Model):
         ('yellow', 'Yellow'),
         ('red', 'Red')
     ]
-    patient = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     assigned_staff = models.ManyToManyField(MedicalStaff)
-    assigned_room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True)
+    assigned_room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True, blank=True)
     severity = models.CharField(max_length=10, choices=SEVERITY_LEVEL, default="green")
-    entry_time = models.DateTimeField(default=datetime.datetime.now)
+    entry_time = models.DateTimeField(auto_now_add=True)
     exit_time = models.DateTimeField(blank=True, null=True)
     completed = models.BooleanField(default=False)
     
