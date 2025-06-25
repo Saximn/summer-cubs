@@ -8,5 +8,8 @@ router = DefaultRouter()
 router.register('register', RegisterViewset, basename='register')
 router.register('login', LoginViewset, basename='login')
 router.register('users', UserViewset, basename='users')
+router.register('patient', PatientViewset, basename="patient")
+router.register('patient/entry', PatientEntryViewset, basename="patient_entries")
+router.register('room', RoomViewset, basename='room')
 
 urlpatterns = router.urls

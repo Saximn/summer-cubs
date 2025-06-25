@@ -2,6 +2,7 @@
 from django.contrib.auth import get_user_model, authenticate
 from knox.models import AuthToken
 from rest_framework import viewsets, permissions
+from rest_framework.decorators import action
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -59,7 +60,47 @@ class UserViewset(viewsets.ViewSet):
         serializer  = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
   
-class PatientEntryView(APIView):
-    def get(self, request):
-        patient_entries = PatientEntry.objects.all()
-        serializer = PatientEntrySerializer(patient_entries)
+class PatientEntryViewset(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = PatientEntry.objects.all()
+    serializer_class = PatientEntrySerializer
+    
+    def create(self, request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+    
+    @action(detail=True, methods=['POST'], url_path="assign_room")
+    def assign_room(self, request, pk=None):
+        patient_entry = self.get_object()
+        serializer = self.serializer_class(patient_entry)
+        if not patient_entry:
+            return Response({"error": "Invalid Patient Entry ID"}, status=400)
+        assigned_room = Room.objects.get(room_number=request.data.get('assigned_room'))
+        patient_entry.assigned_room = assigned_room
+        patient_entry.save()
+        return Response(serializer.data)
+    
+    @action(detail=False, methods=['GET'], url_path="incomplete")
+    def view_incomplete(self, request):
+        incomplete_entries = self.get_queryset().filter(completed=False)
+        serializer = self.serializer_class(instance=incomplete_entries, many=True)
+        return Response(serializer.data)
+ 
+class RoomViewset(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = Room.objects.all()
+    serializer_class = RoomSerializer
+    
+    @action(detail=False, methods=['GET'], url_path=r"floor/(?P<floor_number>[0-9]+)")
+    def view_rooms_by_floor(self, request, floor_number):
+        rooms_by_floor = self.get_queryset().filter(floor=floor_number)
+        serializer = self.serializer_class(instance=rooms_by_floor, many=True)
+        return Response(serializer.data)
+
+class PatientViewset(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]  
+    quertset = Patient.objects.all()
+    serializer_class = PatientSerializer
