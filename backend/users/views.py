@@ -3,9 +3,7 @@ from django.contrib.auth import get_user_model, authenticate
 from knox.models import AuthToken
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import action
-from rest_framework.views import APIView
 from rest_framework.response import Response
-
 
 from .serializers import *
 from .models import *
