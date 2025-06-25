@@ -3,9 +3,7 @@ from django.contrib.auth import get_user_model, authenticate
 from knox.models import AuthToken
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import action
-from rest_framework.views import APIView
 from rest_framework.response import Response
-
 
 from .serializers import *
 from .models import *
@@ -139,5 +137,38 @@ class RoomViewset(viewsets.ModelViewSet):
 class PatientViewset(viewsets.ModelViewSet):
     queryset = Patient.objects.all()
     permission_classes = [permissions.IsAuthenticated]  
-    quertset = Patient.objects.all()
+    queryset = Patient.objects.all()
     serializer_class = PatientSerializer
+
+class FeedbackViewset(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = Feedback.objects.all()
+    serializer_class = FeedbackSerializer
+    
+    def create(self, request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=400)
+
+## OPTIONAL FEATURE ##
+class FeedbackForStaffViewset(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = FeedbackForStaff.objects.all()
+    serializer_class = FeedbackForStaffSerializer
+    
+    def create(self, request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=400)
+    
+    @action(detail=False, methods=['GET'], url_path=r'(staff/?P<staff_id>[0-9]+)')
+    def view_feedback_by_staff(self, request, staff_id):
+        feedback_by_staff = self.get_queryset().filter(staff__id=staff_id)
+        serializer = self.serializer_class(istance=feedback_by_staff, many=True)
+        return Response(serializer.data)

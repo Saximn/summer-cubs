@@ -12,6 +12,8 @@ router.register('users', UserViewset, basename='users')
 router.register('patient', PatientViewset, basename="patient")
 router.register('patient_entry', PatientEntryViewset, basename="patient_entries")
 router.register('room', RoomViewset, basename='room')
+router.register('feedback', FeedbackViewset, basename="feedback")
+router.register('feedbackforstaff', FeedbackForStaffViewset, basename="feedback_for_staff")
 
 urlpatterns = router.urls + [
     path('user/me/', UserMeView.as_view(), name='user-me'),

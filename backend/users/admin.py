@@ -23,6 +23,25 @@ class MedicalStaffAdmin(admin.ModelAdmin):
 class RoomAdmin(admin.ModelAdmin):
     model = Room
     list_display = ('room_number', 'floor', 'capacity')
+    
+class FeedbackAdmin(admin.ModelAdmin):
+    model = Feedback
+    list_display = ('id', 'get_sender_email', 'content')
+    readonly_fields=('id',)
+    
+    @admin.display(description='Sender Email')
+    def get_sender_email(self, obj):
+        return obj.sender.email
+
+class FeedbackForStaffAdmin(FeedbackAdmin):
+    model = FeedbackForStaff
+    list_display = ('id', 'get_staff_name', 'content')
+    readonly_fields=('id',)
+    
+    @admin.display(description="Staff Name")
+    def get_staff_name(self, obj):
+        return list(obj.staff.values_list('name', flat=True))
+
 
 # Register your models here.
 
@@ -31,3 +50,5 @@ admin.site.register(Patient, PatientAdmin)
 admin.site.register(MedicalStaff, MedicalStaffAdmin)
 admin.site.register(Room, RoomAdmin)
 admin.site.register(PatientEntry, PatientEntryAdmin)
+admin.site.register(Feedback, FeedbackAdmin)
+admin.site.register(FeedbackForStaff, FeedbackForStaffAdmin)
