@@ -30,9 +30,10 @@ class CustomUser(AbstractUser):
         ('patient', 'Patient'),
     ]
     
+    username = None  # Disable username field
     email = models.EmailField(max_length=20, unique=True)
     birthday = models.DateField(null=True, blank=True)
-    username = models.CharField(max_length=200, null=True, blank=True)
+    fullname = models.CharField(max_length=200)
     role = models.CharField(max_length=30, choices=ROLES, default="patient")
     
     objects = CustomUserManager()

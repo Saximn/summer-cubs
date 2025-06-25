@@ -7,7 +7,7 @@ User = get_user_model()
 class RegisterSerializer(serializers.ModelSerializer):
   class Meta:
     model = User
-    fields = ('id', 'email', 'password')
+    fields = ('id', 'email', 'password', 'fullname', 'birthday')
     extra_kwargs = { 'password': {'write_only' : True}}
     
   def create(self, validated_data):
@@ -23,6 +23,11 @@ class LoginSerializer(serializers.Serializer):
     ret = super().to_representation(instance)
     ret.pop('password', None)
     return ret
+
+class UserSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = User
+    fields = ['id', 'email', 'fullname', 'role', 'birthday']
 
 class PatientSerializer(serializers.ModelSerializer):
   class Meta:
