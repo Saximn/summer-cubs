@@ -1,0 +1,52 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Hospital Chatbot</title>
+    <style>
+      body { font-family: sans-serif; max-width: 600px; margin: 2em auto; }
+      #chat { border:1px solid #ccc; padding:1em; height: 400px; overflow-y: scroll; }
+      .message { margin:0.5em 0; }
+      .user    { text-align: right; color: #006; }
+      .bot     { text-align: left; color: #060; }
+      #input { width: 80%; }
+      #send  { width: 18%; }
+    </style>
+  </head>
+  <body>
+    <h2>Hospital Assistant</h2>
+    <div id="chat"></div>
+    <input id="input" placeholder="Ask me about doctors…" />
+    <button id="send">Send</button>
+
+    <script>
+      const chatDiv = document.getElementById("chat");
+      const input   = document.getElementById("input");
+      const sendBtn = document.getElementById("send");
+
+      function append(who, text) {
+        const d = document.createElement("div");
+        d.className = `message ${who}`;
+        d.textContent = text;
+        chatDiv.appendChild(d);
+        chatDiv.scrollTop = chatDiv.scrollHeight;
+      }
+
+      sendBtn.onclick = async () => {
+        const msg = input.value;
+        if (!msg) return;
+        append("user", msg);
+        input.value = "";
+
+        const res = await fetch("/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: msg })
+        });
+        const { reply } = await res.json();
+        append("bot", reply);
+      };
+    </script>
+  </body>
+</html>
