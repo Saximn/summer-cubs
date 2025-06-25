@@ -77,19 +77,30 @@ class PatientEntryViewset(viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
+        print(serializer.errors)
         return Response(serializer.errors, status=400)
     
     @action(detail=True, methods=['POST'], url_path="assign_room")
     def assign_room(self, request, pk=None):
         patient_entry = self.get_object()
-        serializer = self.serializer_class(patient_entry)
-        if not patient_entry:
-            return Response({"error": "Invalid Patient Entry ID"}, status=400)
-        assigned_room = Room.objects.get(room_number=request.data.get('assigned_room'))
+        room_data = request.data.get("assigned_room")
+
+        if not room_data or not room_data.get("room_number") or not room_data.get("floor"):
+            return Response({"error": "Missing 'room_number' or 'floor'"}, status=400)
+
+        try:
+            assigned_room = Room.objects.get(room_number=room_data["room_number"], floor=room_data["floor"])
+        except Room.DoesNotExist:
+            return Response({"error": "Room not found"}, status=404)
+        except Room.MultipleObjectsReturned:
+            return Response({"error": "Multiple rooms found; floor must be specified uniquely"}, status=400)
+
         patient_entry.assigned_room = assigned_room
         patient_entry.save()
+
+        serializer = self.serializer_class(patient_entry)
         return Response(serializer.data)
-    
+        
     @action(detail=False, methods=['GET'], url_path="incomplete")
     def view_incomplete(self, request):
         incomplete_entries = self.get_queryset().filter(completed=False)
@@ -107,7 +118,25 @@ class RoomViewset(viewsets.ModelViewSet):
         serializer = self.serializer_class(instance=rooms_by_floor, many=True)
         return Response(serializer.data)
 
+    @action(detail=False, methods=['GET'], url_path='availability')
+    def availability_per_floor(self, request):
+        availability = {}
+
+        for floor in range(1, 6):  # floors 1 to 5
+            floor_rooms = Room.objects.filter(floor=floor)
+            available_count = 0
+
+            for room in floor_rooms:
+                occupied = PatientEntry.objects.filter(assigned_room=room, completed=False).count()
+                if occupied < room.capacity:
+                    available_count += 1
+
+            availability[floor] = available_count
+
+        return Response(availability)
+
 class PatientViewset(viewsets.ModelViewSet):
+    queryset = Patient.objects.all()
     permission_classes = [permissions.IsAuthenticated]  
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer

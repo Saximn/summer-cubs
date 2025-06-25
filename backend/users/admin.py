@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import *
 
+
 class PatientEntryAdmin(admin.ModelAdmin):
     model = PatientEntry
     list_display = ('get_patient_name', 'entry_time', 'completed')
