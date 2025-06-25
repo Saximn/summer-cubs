@@ -21,6 +21,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import { Box, Menu, MenuItem } from '@mui/material';
 import { logoutAction } from '@/app/logout/actions';
+import { getCurrentUser } from '@/lib/auth/getCurrentUser';
 
 const drawerWidth = 260;
 
@@ -80,7 +81,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function Navbar() {
+export default function Navbar({ user }: { user: any }) {
   const [open, setOpen] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const accountMenuOpen = Boolean(anchorEl);
@@ -234,8 +235,8 @@ export default function Navbar() {
         />
         {open && (
           <Box>
-            <Box sx={{ fontWeight: 600 }}>John Doe</Box>
-            <Box sx={{ fontSize: 12, color: '#888' }}>john.doe@email.com</Box>
+            <Box sx={{ fontWeight: 600 }}>{user?.fullname}</Box>
+            <Box sx={{ fontSize: 12, color: '#888' }}>{user?.email}</Box>
           </Box>
         )}
       </Box>

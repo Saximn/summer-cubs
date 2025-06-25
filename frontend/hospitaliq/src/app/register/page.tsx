@@ -7,7 +7,7 @@ import { registerAction } from './actions';
 const RegisterPage = () => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
-    const [fullName, setFullName] = React.useState('');
+    const [fullname, setfullname] = React.useState('');
     const [birthdate, setBirthdate] = React.useState('');
     const [error, setError] = React.useState<{
         email?: string[];
@@ -21,7 +21,7 @@ const RegisterPage = () => {
         const formData = new FormData();
         formData.append('email', email);
         formData.append('password', password);
-        formData.append('fullName', fullName);
+        formData.append('fullname', fullname);
         formData.append('birthdate', birthdate);
 
         const result = await registerAction(formData);
@@ -51,8 +51,8 @@ const RegisterPage = () => {
                             id="register-fullname"
                             placeholder='Your full name'
                             variant="outlined"
-                            value={fullName}
-                            onChange={(e) => setFullName(e.target.value)}
+                            value={fullname}
+                            onChange={(e) => setfullname(e.target.value)}
                             error = {Boolean(error.fullname)}
                             helperText={error.fullname?.[0]}
                             required
