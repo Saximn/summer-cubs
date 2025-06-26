@@ -5,6 +5,7 @@ from rest_framework import viewsets, permissions
 from rest_framework.views import APIView
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from .serializers import *
 from .models import *
@@ -15,7 +16,7 @@ class UserMeView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
-        serializer = RegisterSerializer(request.user)
+        serializer = UserSerializer(request.user)
         return Response(serializer.data)
 
 # Create your views here.
