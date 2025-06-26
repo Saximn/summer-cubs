@@ -117,6 +117,11 @@ export default function Navbar({ user }: { user: any }) {
       link: '/patient'
     },
     {
+      text: 'Patient Allocation',
+      icon: <PersonalInjuryIcon />,
+      link: '/allocation'
+    },
+    {
       text: 'Simulation',
       icon: <EngineeringIcon />,
       link: '/simulation'
@@ -127,19 +132,14 @@ export default function Navbar({ user }: { user: any }) {
       link: '/policy'
     },
     {
-      text: 'Patient Allocation',
-      icon: <PersonalInjuryIcon />,
-      link: '/allocation'
-    },
-    {
       text: 'Feedback Form',
       icon: <FeedbackIcon />,
       link: '/feedback'
     },
     {
-        text: 'Chatbot',
-        icon: <QuestionAnswerIcon />,
-        link: '/chatbot'
+      text: 'Chatbot',
+      icon: <QuestionAnswerIcon />,
+      link: '/chatbot'
     },
   ]
 

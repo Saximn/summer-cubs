@@ -1,5 +1,5 @@
-import { Box, List, ListItem, ListItemText } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
+import { Box, List, ListItem, ListItemText, Button } from "@mui/material";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 export default function PatientList({
   selectedPatient,
@@ -8,6 +8,8 @@ export default function PatientList({
   selectedPatient: any;
   setSelectedPatient: (patient: any) => void;
 }) {
+  const queryClient = useQueryClient();
+
   const { data: patients = [], isLoading, isError } = useQuery({
     queryKey: ["incomplete-patient-entries"],
     queryFn: async () => {
@@ -16,6 +18,30 @@ export default function PatientList({
       });
       if (!res.ok) throw new Error("Failed to fetch");
       return res.json();
+    },
+  });
+
+  const dischargeMutation = useMutation({
+    mutationFn: async (patientEntryId: string) => {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/patient_entry/${patientEntryId}/`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            exit_time: new Date().toISOString(),
+            completed: true,
+          }),
+        }
+      );
+      if (!res.ok) throw new Error("Failed to discharge patient");
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["incomplete-patient-entries"]);
     },
   });
 
@@ -38,10 +64,12 @@ export default function PatientList({
           const isSelected = selectedPatient && selectedPatient.id === patient.id;
           return (
             <ListItem
-              component="button"
+              component="div"
               key={patient.id}
               sx={{
-                display: "list-item",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "stretch",
                 bgcolor: isSelected ? "primary.light" : "background.paper",
                 cursor: "pointer",
                 width: "100%",
@@ -69,7 +97,7 @@ export default function PatientList({
                   sx={{ textAlign: "right" }}
                 />
               </Box>
-              <Box display="flex" justifyContent="space-between">
+              <Box display="flex" justifyContent="space-between" mb={1}>
                 <ListItemText
                   secondary={`Severity: ${patient.severity ?? "Unknown"}`}
                   slotProps={{
@@ -83,6 +111,19 @@ export default function PatientList({
                   }}
                   sx={{ textAlign: "right" }}
                 />
+              </Box>
+              <Box display="flex" justifyContent="flex-end">
+                <Button
+                  variant="outlined"
+                  color="error"
+                  size="small"
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent selecting patient
+                    dischargeMutation.mutate(patient.id);
+                  }}
+                >
+                  Discharge
+                </Button>
               </Box>
             </ListItem>
           );
