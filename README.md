@@ -50,6 +50,7 @@ HospitalIQ/
 │   └── *.ipynb          # Jupyter Notebooks
 └── output/              # Generated Data (FHIR, Metadata)
 ```
+![System Architecture](architecture.png)
 
 ## 🚀 Tech Stack
 
