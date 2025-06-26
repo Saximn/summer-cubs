@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   backend:
     build: ./backend
@@ -13,9 +11,11 @@ services:
       - .env
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend/hospitaliq
+      dockerfile: Dockerfile
     volumes:
-      - ./frontend:/app
+      - ./frontend/hospitaliq:/app
     ports:
       - "3000:3000"
     environment:
