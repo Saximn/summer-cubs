@@ -17,7 +17,7 @@ try:
         add_texts_to_vector_store, 
         create_search_tool
     )
-    from agent_utils import init_llm, create_agent
+    from agent_utils import init_llm, create_agent, get_current_datetime, get_current_date, get_current_time
     from prompts import system_message, description, suffix
 except ImportError:
     # Fallback for relative imports
@@ -28,7 +28,7 @@ except ImportError:
         add_texts_to_vector_store, 
         create_search_tool
     )
-    from .agent_utils import init_llm, create_agent
+    from .agent_utils import init_llm, create_agent, get_current_datetime, get_current_date, get_current_time
     from .prompts import system_message, description, suffix
 
 
@@ -137,8 +137,11 @@ class LangGraphChatbot:
             description=description
         )
         
+        # Create datetime tools
+        datetime_tools = [get_current_datetime, get_current_date, get_current_time]
+        
         # Combine all tools
-        self.tools = sql_tools + [retriever_tool]
+        self.tools = sql_tools + [retriever_tool] + datetime_tools
         
         # Create the agent with combined system message
         system_prompt = f"{system_message}\n\n{suffix}"
@@ -190,6 +193,8 @@ Respond with "YES" if the query:
 - Requests counts, statistics, or specific information
 - Mentions medical procedures, conditions, or healthcare data
 - Asks "how many", "list", "find", "search" for medical information
+- Asks about current time, date, or datetime information
+- Needs to schedule appointments or time-related queries
 
 Respond with "NO" if the query:
 - Is a general greeting or conversation
@@ -344,6 +349,8 @@ if __name__ == "__main__":
         "Hello, how are you?",
         "How many doctors specialize in cardiology?",
         "What is hypertension?",
+        "What time is it now?",
+        "What's the current date?",
         "List all available specialties",
         "Thanks for your help!"
     ]
