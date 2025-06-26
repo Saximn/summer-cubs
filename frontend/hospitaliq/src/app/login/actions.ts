@@ -22,10 +22,10 @@ export async function loginAction(formData: FormData) {
         const cookieStore = await cookies();
         cookieStore.set('auth_token', token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
-            sameSite: 'lax',
+            secure: true, // Use secure cookies in production
+            sameSite: 'none',
             path: '/', // Set the path to root so it's accessible throughout the app
-            maxAge: 60 * 60 * 24 * 7, // 1 week
+            maxAge: 60 * 60 * 24 * 7, // 1 week,
         });
         
         return { success: true, role: user.role };
