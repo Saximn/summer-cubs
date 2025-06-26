@@ -52,10 +52,10 @@ export default function PolicyPage() {
                 <Card className="bg-navy h-20" color="#313860">
                   <Box sx={{ flexGrow: 1 }}>
                     <Grid container sx={{ color: 'orange' }}>
-                      <Grid item xs={2}>
+                      <Grid size={2}>
                         <PrivacyTipIcon />
                       </Grid>
-                      <Grid item xs={10}>
+                      <Grid size={10}>
                         <h6 className="font-bold text-white mb-1">{item.subtitle}</h6>
                         <h6 className="text-gray-500">{item.time}</h6>
                       </Grid>

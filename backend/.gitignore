@@ -2,7 +2,6 @@
 Thumbs.db
 
 .pytest_cache/
-*/migrations/
 Pipfile.lock
 poetry.lock
 
