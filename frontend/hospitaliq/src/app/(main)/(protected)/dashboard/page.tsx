@@ -24,7 +24,7 @@ export default function Home() {
           <Stack spacing={3} className='h-full w-full'>
             <Stack direction='row' spacing={3} className='h-full w-full'>
               <CustomCard className='flex flex-col gap-3'>
-                <h6 className='font-bold'>Patients: 15</h6>
+                <h6 className='font-bold'>Patients</h6>
                 <AddPatient />
               </CustomCard>
               <CustomCard>
@@ -40,7 +40,7 @@ export default function Home() {
         <Grid className='h-full' size={4}>
           <Stack spacing={3} className='h-full w-full'>
             <CustomCard className='min-h-0 flex flex-col'>
-              <h6 className='font-bold'>Staff Availability: 24</h6>
+              <h6 className='font-bold'>Staff Availability</h6>
                 <List
                 sx={{
                   width: '100%',
