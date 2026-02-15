@@ -36,6 +36,34 @@ def create_search_tool(vector_store, name, description, k=5):
     )
 
 
+def create_hybrid_search_tool(
+    db_path: str = "doctors.db",
+    vector_store_dir: str = "./chroma_langchain_db",
+    name: str = "hybrid_search",
+    description: str = "Search for medical skills and specialties using hybrid retrieval",
+    k: int = 5
+):
+    """
+    Create a LangChain tool for hybrid search (BM25 + vector).
+    
+    This function provides a hybrid retrieval tool that combines BM25 lexical search
+    with vector semantic search for improved retrieval performance.
+    
+    Args:
+        db_path: Path to database
+        vector_store_dir: Vector store directory
+        name: Tool name
+        description: Tool description
+        k: Number of results to return
+    
+    Returns:
+        LangChain tool instance for hybrid search
+    """
+    from hybrid_retrieval import create_hybrid_search_tool as _create_hybrid_tool
+    return _create_hybrid_tool(db_path, vector_store_dir, name, description, k)
+
+
 def init_embeddings(model="text-embedding-3-small"):
     """Initialize OpenAI embeddings."""
     return OpenAIEmbeddings(model=model)
+
