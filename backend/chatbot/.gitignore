@@ -1,0 +1,21 @@
+# Evaluation output files (regenerated on each run)
+chatbot_metrics.json
+evaluation_errors.log
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

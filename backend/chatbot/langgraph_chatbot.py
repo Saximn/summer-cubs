@@ -49,13 +49,23 @@ class LangGraphChatbot:
         db_path: str = "doctors.db",
         model_name: str = "gpt-4o-mini",
         embedding_model: str = "text-embedding-3-small",
-        vector_store_dir: str = "./chroma_langchain_db"
+        vector_store_dir: str = "./chroma_langchain_db",
+        use_hybrid_retrieval: bool = False
     ):
-        """Initialize the chatbot with database and AI models."""
+        """Initialize the chatbot with database and AI models.
+        
+        Args:
+            db_path: Path to SQLite database
+            model_name: Name of the LLM model
+            embedding_model: Name of the embedding model
+            vector_store_dir: Directory for vector store
+            use_hybrid_retrieval: Whether to use hybrid BM25+vector retrieval (default: False)
+        """
         self.db_path = db_path
         self.model_name = model_name
         self.embedding_model = embedding_model
         self.vector_store_dir = vector_store_dir
+        self.use_hybrid_retrieval = use_hybrid_retrieval
         
         # Initialize components
         self._setup_database()
@@ -130,12 +140,30 @@ class LangGraphChatbot:
         # Get SQL tools
         sql_tools = create_sql_toolkit(self.db, self.llm)
         
-        # Create retriever tool
-        retriever_tool = create_search_tool(
-            self.vector_store,
-            name="search_proper_nouns",
-            description=description
-        )
+        # Create retriever tool (hybrid or vector-only)
+        if self.use_hybrid_retrieval:
+            try:
+                from vector_utils import create_hybrid_search_tool
+                retriever_tool = create_hybrid_search_tool(
+                    db_path=self.db_path,
+                    vector_store_dir=self.vector_store_dir,
+                    name="search_proper_nouns",
+                    description=description
+                )
+                print("✅ Using hybrid retrieval (BM25 + vector)")
+            except Exception as e:
+                print(f"⚠️  Hybrid retrieval failed, falling back to vector-only: {e}")
+                retriever_tool = create_search_tool(
+                    self.vector_store,
+                    name="search_proper_nouns",
+                    description=description
+                )
+        else:
+            retriever_tool = create_search_tool(
+                self.vector_store,
+                name="search_proper_nouns",
+                description=description
+            )
         
         # Create datetime tools
         datetime_tools = [get_current_datetime, get_current_date, get_current_time]

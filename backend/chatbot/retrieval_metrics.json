@@ -1,0 +1,29 @@
+{
+  "dataset": "evaluation_dataset.json",
+  "total_queries": 105,
+  "k_values": [
+    1,
+    3,
+    5,
+    10
+  ],
+  "baseline": {},
+  "hybrid": {
+    "retriever": "BM25 Only",
+    "num_queries": 93,
+    "recall": {
+      "recall@1": 0.8655913978494624,
+      "recall@3": 0.8709677419354839,
+      "recall@5": 0.8709677419354839,
+      "recall@10": 0.8709677419354839
+    },
+    "mrr": 0.8709677419354839,
+    "ndcg": {
+      "ndcg@1": 0.8709677419354839,
+      "ndcg@3": 0.8709677419354839,
+      "ndcg@5": 0.8709677419354839,
+      "ndcg@10": 0.8709677419354839
+    }
+  },
+  "improvement": {}
+}

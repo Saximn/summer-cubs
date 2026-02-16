@@ -1,0 +1,1083 @@
+{
+  "metadata": {
+    "total_queries": 105,
+    "database_queries": 99,
+    "general_queries": 6,
+    "query_types": [
+      "acknowledgment",
+      "general_procedure",
+      "greeting",
+      "list_specialties",
+      "specialty_list",
+      "datetime_time",
+      "count",
+      "complex_join",
+      "general_definition",
+      "datetime_full",
+      "skill_search",
+      "specialty_count",
+      "general_symptoms",
+      "comparison",
+      "datetime_date",
+      "list_all",
+      "general_anatomy"
+    ],
+    "database_stats": {
+      "total_doctors": 500,
+      "specialties": [
+        "urology",
+        "oncology",
+        "pediatrics",
+        "cardiology",
+        "endocrinology",
+        "dermatology",
+        "neurology",
+        "orthopedics",
+        "psychiatry",
+        "gastroenterology"
+      ],
+      "unique_skills": 30
+    }
+  },
+  "queries": [
+    {
+      "query": "How many doctors do we have?",
+      "relevant_docs": [],
+      "expected_route": "database",
+      "ground_truth_answer": "There are 500 doctors in total.",
+      "query_type": "count",
+      "sql_pattern": "SELECT COUNT(*) FROM doctors"
+    },
+    {
+      "query": "What is the total number of doctors?",
+      "relevant_docs": [],
+      "expected_route": "database",
+      "ground_truth_answer": "500 doctors",
+      "query_type": "count",
+      "sql_pattern": "SELECT COUNT(*) FROM doctors"
+    },
+    {
+      "query": "How many doctors specialize in urology?",
+      "relevant_docs": [
+        "urology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "There are 56 doctors who specialize in urology.",
+      "query_type": "specialty_count",
+      "sql_pattern": "SELECT COUNT(*) FROM doctors WHERE specialty = 'urology'"
+    },
+    {
+      "query": "List all urology doctors",
+      "relevant_docs": [
+        "urology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in urology",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'urology'"
+    },
+    {
+      "query": "Find urology specialists",
+      "relevant_docs": [
+        "urology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in urology",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'urology'"
+    },
+    {
+      "query": "Show me doctors in urology",
+      "relevant_docs": [
+        "urology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in urology",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'urology'"
+    },
+    {
+      "query": "Count of urology doctors",
+      "relevant_docs": [
+        "urology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "There are 56 doctors who specialize in urology.",
+      "query_type": "specialty_count",
+      "sql_pattern": "SELECT COUNT(*) FROM doctors WHERE specialty = 'urology'"
+    },
+    {
+      "query": "How many doctors specialize in oncology?",
+      "relevant_docs": [
+        "oncology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "There are 57 doctors who specialize in oncology.",
+      "query_type": "specialty_count",
+      "sql_pattern": "SELECT COUNT(*) FROM doctors WHERE specialty = 'oncology'"
+    },
+    {
+      "query": "List all oncology doctors",
+      "relevant_docs": [
+        "oncology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in oncology",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'oncology'"
+    },
+    {
+      "query": "Find oncology specialists",
+      "relevant_docs": [
+        "oncology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in oncology",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'oncology'"
+    },
+    {
+      "query": "Show me doctors in oncology",
+      "relevant_docs": [
+        "oncology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in oncology",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'oncology'"
+    },
+    {
+      "query": "Count of oncology doctors",
+      "relevant_docs": [
+        "oncology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "There are 57 doctors who specialize in oncology.",
+      "query_type": "specialty_count",
+      "sql_pattern": "SELECT COUNT(*) FROM doctors WHERE specialty = 'oncology'"
+    },
+    {
+      "query": "How many doctors specialize in pediatrics?",
+      "relevant_docs": [
+        "pediatrics"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "There are 39 doctors who specialize in pediatrics.",
+      "query_type": "specialty_count",
+      "sql_pattern": "SELECT COUNT(*) FROM doctors WHERE specialty = 'pediatrics'"
+    },
+    {
+      "query": "List all pediatrics doctors",
+      "relevant_docs": [
+        "pediatrics"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in pediatrics",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'pediatrics'"
+    },
+    {
+      "query": "Find pediatrics specialists",
+      "relevant_docs": [
+        "pediatrics"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in pediatrics",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'pediatrics'"
+    },
+    {
+      "query": "Show me doctors in pediatrics",
+      "relevant_docs": [
+        "pediatrics"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in pediatrics",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'pediatrics'"
+    },
+    {
+      "query": "Count of pediatrics doctors",
+      "relevant_docs": [
+        "pediatrics"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "There are 39 doctors who specialize in pediatrics.",
+      "query_type": "specialty_count",
+      "sql_pattern": "SELECT COUNT(*) FROM doctors WHERE specialty = 'pediatrics'"
+    },
+    {
+      "query": "How many doctors specialize in cardiology?",
+      "relevant_docs": [
+        "cardiology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "There are 50 doctors who specialize in cardiology.",
+      "query_type": "specialty_count",
+      "sql_pattern": "SELECT COUNT(*) FROM doctors WHERE specialty = 'cardiology'"
+    },
+    {
+      "query": "List all cardiology doctors",
+      "relevant_docs": [
+        "cardiology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in cardiology",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'cardiology'"
+    },
+    {
+      "query": "Find cardiology specialists",
+      "relevant_docs": [
+        "cardiology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in cardiology",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'cardiology'"
+    },
+    {
+      "query": "Show me doctors in cardiology",
+      "relevant_docs": [
+        "cardiology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in cardiology",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'cardiology'"
+    },
+    {
+      "query": "Count of cardiology doctors",
+      "relevant_docs": [
+        "cardiology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "There are 50 doctors who specialize in cardiology.",
+      "query_type": "specialty_count",
+      "sql_pattern": "SELECT COUNT(*) FROM doctors WHERE specialty = 'cardiology'"
+    },
+    {
+      "query": "How many doctors specialize in endocrinology?",
+      "relevant_docs": [
+        "endocrinology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "There are 51 doctors who specialize in endocrinology.",
+      "query_type": "specialty_count",
+      "sql_pattern": "SELECT COUNT(*) FROM doctors WHERE specialty = 'endocrinology'"
+    },
+    {
+      "query": "List all endocrinology doctors",
+      "relevant_docs": [
+        "endocrinology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in endocrinology",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'endocrinology'"
+    },
+    {
+      "query": "Find endocrinology specialists",
+      "relevant_docs": [
+        "endocrinology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in endocrinology",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'endocrinology'"
+    },
+    {
+      "query": "Show me doctors in endocrinology",
+      "relevant_docs": [
+        "endocrinology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in endocrinology",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'endocrinology'"
+    },
+    {
+      "query": "Count of endocrinology doctors",
+      "relevant_docs": [
+        "endocrinology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "There are 51 doctors who specialize in endocrinology.",
+      "query_type": "specialty_count",
+      "sql_pattern": "SELECT COUNT(*) FROM doctors WHERE specialty = 'endocrinology'"
+    },
+    {
+      "query": "How many doctors specialize in dermatology?",
+      "relevant_docs": [
+        "dermatology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "There are 40 doctors who specialize in dermatology.",
+      "query_type": "specialty_count",
+      "sql_pattern": "SELECT COUNT(*) FROM doctors WHERE specialty = 'dermatology'"
+    },
+    {
+      "query": "List all dermatology doctors",
+      "relevant_docs": [
+        "dermatology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in dermatology",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'dermatology'"
+    },
+    {
+      "query": "Find dermatology specialists",
+      "relevant_docs": [
+        "dermatology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in dermatology",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'dermatology'"
+    },
+    {
+      "query": "Show me doctors in dermatology",
+      "relevant_docs": [
+        "dermatology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in dermatology",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'dermatology'"
+    },
+    {
+      "query": "Count of dermatology doctors",
+      "relevant_docs": [
+        "dermatology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "There are 40 doctors who specialize in dermatology.",
+      "query_type": "specialty_count",
+      "sql_pattern": "SELECT COUNT(*) FROM doctors WHERE specialty = 'dermatology'"
+    },
+    {
+      "query": "How many doctors specialize in neurology?",
+      "relevant_docs": [
+        "neurology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "There are 47 doctors who specialize in neurology.",
+      "query_type": "specialty_count",
+      "sql_pattern": "SELECT COUNT(*) FROM doctors WHERE specialty = 'neurology'"
+    },
+    {
+      "query": "List all neurology doctors",
+      "relevant_docs": [
+        "neurology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in neurology",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'neurology'"
+    },
+    {
+      "query": "Find neurology specialists",
+      "relevant_docs": [
+        "neurology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in neurology",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'neurology'"
+    },
+    {
+      "query": "Show me doctors in neurology",
+      "relevant_docs": [
+        "neurology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in neurology",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'neurology'"
+    },
+    {
+      "query": "Count of neurology doctors",
+      "relevant_docs": [
+        "neurology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "There are 47 doctors who specialize in neurology.",
+      "query_type": "specialty_count",
+      "sql_pattern": "SELECT COUNT(*) FROM doctors WHERE specialty = 'neurology'"
+    },
+    {
+      "query": "How many doctors specialize in orthopedics?",
+      "relevant_docs": [
+        "orthopedics"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "There are 56 doctors who specialize in orthopedics.",
+      "query_type": "specialty_count",
+      "sql_pattern": "SELECT COUNT(*) FROM doctors WHERE specialty = 'orthopedics'"
+    },
+    {
+      "query": "List all orthopedics doctors",
+      "relevant_docs": [
+        "orthopedics"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in orthopedics",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'orthopedics'"
+    },
+    {
+      "query": "Find orthopedics specialists",
+      "relevant_docs": [
+        "orthopedics"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in orthopedics",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'orthopedics'"
+    },
+    {
+      "query": "Show me doctors in orthopedics",
+      "relevant_docs": [
+        "orthopedics"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in orthopedics",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'orthopedics'"
+    },
+    {
+      "query": "Count of orthopedics doctors",
+      "relevant_docs": [
+        "orthopedics"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "There are 56 doctors who specialize in orthopedics.",
+      "query_type": "specialty_count",
+      "sql_pattern": "SELECT COUNT(*) FROM doctors WHERE specialty = 'orthopedics'"
+    },
+    {
+      "query": "How many doctors specialize in psychiatry?",
+      "relevant_docs": [
+        "psychiatry"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "There are 52 doctors who specialize in psychiatry.",
+      "query_type": "specialty_count",
+      "sql_pattern": "SELECT COUNT(*) FROM doctors WHERE specialty = 'psychiatry'"
+    },
+    {
+      "query": "List all psychiatry doctors",
+      "relevant_docs": [
+        "psychiatry"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in psychiatry",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'psychiatry'"
+    },
+    {
+      "query": "Find psychiatry specialists",
+      "relevant_docs": [
+        "psychiatry"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in psychiatry",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'psychiatry'"
+    },
+    {
+      "query": "Show me doctors in psychiatry",
+      "relevant_docs": [
+        "psychiatry"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in psychiatry",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'psychiatry'"
+    },
+    {
+      "query": "Count of psychiatry doctors",
+      "relevant_docs": [
+        "psychiatry"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "There are 52 doctors who specialize in psychiatry.",
+      "query_type": "specialty_count",
+      "sql_pattern": "SELECT COUNT(*) FROM doctors WHERE specialty = 'psychiatry'"
+    },
+    {
+      "query": "How many doctors specialize in gastroenterology?",
+      "relevant_docs": [
+        "gastroenterology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "There are 52 doctors who specialize in gastroenterology.",
+      "query_type": "specialty_count",
+      "sql_pattern": "SELECT COUNT(*) FROM doctors WHERE specialty = 'gastroenterology'"
+    },
+    {
+      "query": "List all gastroenterology doctors",
+      "relevant_docs": [
+        "gastroenterology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in gastroenterology",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'gastroenterology'"
+    },
+    {
+      "query": "Find gastroenterology specialists",
+      "relevant_docs": [
+        "gastroenterology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in gastroenterology",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'gastroenterology'"
+    },
+    {
+      "query": "Show me doctors in gastroenterology",
+      "relevant_docs": [
+        "gastroenterology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors specializing in gastroenterology",
+      "query_type": "specialty_list",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'gastroenterology'"
+    },
+    {
+      "query": "Count of gastroenterology doctors",
+      "relevant_docs": [
+        "gastroenterology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "There are 52 doctors who specialize in gastroenterology.",
+      "query_type": "specialty_count",
+      "sql_pattern": "SELECT COUNT(*) FROM doctors WHERE specialty = 'gastroenterology'"
+    },
+    {
+      "query": "Find doctors with immunizations skills",
+      "relevant_docs": [
+        "immunizations"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with immunizations skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'immunizations')"
+    },
+    {
+      "query": "Who has immunizations expertise?",
+      "relevant_docs": [
+        "immunizations"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with immunizations skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'immunizations')"
+    },
+    {
+      "query": "Find doctors with skin biopsy skills",
+      "relevant_docs": [
+        "skin biopsy"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with skin biopsy skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'skin biopsy')"
+    },
+    {
+      "query": "Who has skin biopsy expertise?",
+      "relevant_docs": [
+        "skin biopsy"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with skin biopsy skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'skin biopsy')"
+    },
+    {
+      "query": "Find doctors with psychiatric eval skills",
+      "relevant_docs": [
+        "psychiatric eval"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with psychiatric eval skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'psychiatric eval')"
+    },
+    {
+      "query": "Who has psychiatric eval expertise?",
+      "relevant_docs": [
+        "psychiatric eval"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with psychiatric eval skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'psychiatric eval')"
+    },
+    {
+      "query": "Find doctors with upper endoscopy skills",
+      "relevant_docs": [
+        "upper endoscopy"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with upper endoscopy skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'upper endoscopy')"
+    },
+    {
+      "query": "Who has upper endoscopy expertise?",
+      "relevant_docs": [
+        "upper endoscopy"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with upper endoscopy skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'upper endoscopy')"
+    },
+    {
+      "query": "Find doctors with echocardiogram skills",
+      "relevant_docs": [
+        "echocardiogram"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with echocardiogram skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'echocardiogram')"
+    },
+    {
+      "query": "Who has echocardiogram expertise?",
+      "relevant_docs": [
+        "echocardiogram"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with echocardiogram skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'echocardiogram')"
+    },
+    {
+      "query": "Find doctors with joint replacement skills",
+      "relevant_docs": [
+        "joint replacement"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with joint replacement skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'joint replacement')"
+    },
+    {
+      "query": "Who has joint replacement expertise?",
+      "relevant_docs": [
+        "joint replacement"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with joint replacement skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'joint replacement')"
+    },
+    {
+      "query": "Find doctors with CBT skills",
+      "relevant_docs": [
+        "CBT"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with CBT skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'CBT')"
+    },
+    {
+      "query": "Who has CBT expertise?",
+      "relevant_docs": [
+        "CBT"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with CBT skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'CBT')"
+    },
+    {
+      "query": "Find doctors with stress test skills",
+      "relevant_docs": [
+        "stress test"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with stress test skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'stress test')"
+    },
+    {
+      "query": "Who has stress test expertise?",
+      "relevant_docs": [
+        "stress test"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with stress test skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'stress test')"
+    },
+    {
+      "query": "Find doctors with lumbar puncture skills",
+      "relevant_docs": [
+        "lumbar puncture"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with lumbar puncture skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'lumbar puncture')"
+    },
+    {
+      "query": "Who has lumbar puncture expertise?",
+      "relevant_docs": [
+        "lumbar puncture"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with lumbar puncture skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'lumbar puncture')"
+    },
+    {
+      "query": "Find doctors with cystoscopy skills",
+      "relevant_docs": [
+        "cystoscopy"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with cystoscopy skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'cystoscopy')"
+    },
+    {
+      "query": "Who has cystoscopy expertise?",
+      "relevant_docs": [
+        "cystoscopy"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with cystoscopy skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'cystoscopy')"
+    },
+    {
+      "query": "Find doctors with fracture fixation skills",
+      "relevant_docs": [
+        "fracture fixation"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with fracture fixation skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'fracture fixation')"
+    },
+    {
+      "query": "Who has fracture fixation expertise?",
+      "relevant_docs": [
+        "fracture fixation"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with fracture fixation skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'fracture fixation')"
+    },
+    {
+      "query": "Find doctors with colonoscopy skills",
+      "relevant_docs": [
+        "colonoscopy"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with colonoscopy skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'colonoscopy')"
+    },
+    {
+      "query": "Who has colonoscopy expertise?",
+      "relevant_docs": [
+        "colonoscopy"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with colonoscopy skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'colonoscopy')"
+    },
+    {
+      "query": "Find doctors with EMG skills",
+      "relevant_docs": [
+        "EMG"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with EMG skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'EMG')"
+    },
+    {
+      "query": "Who has EMG expertise?",
+      "relevant_docs": [
+        "EMG"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with EMG skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'EMG')"
+    },
+    {
+      "query": "Find doctors with liver biopsy skills",
+      "relevant_docs": [
+        "liver biopsy"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with liver biopsy skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'liver biopsy')"
+    },
+    {
+      "query": "Who has liver biopsy expertise?",
+      "relevant_docs": [
+        "liver biopsy"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with liver biopsy skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'liver biopsy')"
+    },
+    {
+      "query": "Find doctors with well-child exam skills",
+      "relevant_docs": [
+        "well-child exam"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with well-child exam skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'well-child exam')"
+    },
+    {
+      "query": "Who has well-child exam expertise?",
+      "relevant_docs": [
+        "well-child exam"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with well-child exam skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'well-child exam')"
+    },
+    {
+      "query": "Find doctors with radiation planning skills",
+      "relevant_docs": [
+        "radiation planning"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with radiation planning skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'radiation planning')"
+    },
+    {
+      "query": "Who has radiation planning expertise?",
+      "relevant_docs": [
+        "radiation planning"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with radiation planning skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'radiation planning')"
+    },
+    {
+      "query": "Find doctors with tumor biopsy skills",
+      "relevant_docs": [
+        "tumor biopsy"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with tumor biopsy skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'tumor biopsy')"
+    },
+    {
+      "query": "Who has tumor biopsy expertise?",
+      "relevant_docs": [
+        "tumor biopsy"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with tumor biopsy skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'tumor biopsy')"
+    },
+    {
+      "query": "Find doctors with medication management skills",
+      "relevant_docs": [
+        "medication management"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with medication management skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'medication management')"
+    },
+    {
+      "query": "Who has medication management expertise?",
+      "relevant_docs": [
+        "medication management"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with medication management skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'medication management')"
+    },
+    {
+      "query": "Find doctors with EEG skills",
+      "relevant_docs": [
+        "EEG"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with EEG skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'EEG')"
+    },
+    {
+      "query": "Who has EEG expertise?",
+      "relevant_docs": [
+        "EEG"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with EEG skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'EEG')"
+    },
+    {
+      "query": "Find doctors with urinalysis skills",
+      "relevant_docs": [
+        "urinalysis"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with urinalysis skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'urinalysis')"
+    },
+    {
+      "query": "Who has urinalysis expertise?",
+      "relevant_docs": [
+        "urinalysis"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors with urinalysis skill",
+      "query_type": "skill_search",
+      "sql_pattern": "SELECT * FROM doctors WHERE id IN (SELECT doctor_id FROM skills WHERE skill = 'urinalysis')"
+    },
+    {
+      "query": "How many doctors work on Monday and specialize in urology?",
+      "relevant_docs": [
+        "urology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Doctors working Monday with urology specialty",
+      "query_type": "complex_join",
+      "sql_pattern": "JOIN with schedule table"
+    },
+    {
+      "query": "Compare the number of urology vs oncology doctors",
+      "relevant_docs": [
+        "urology",
+        "oncology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Comparison of specialty counts",
+      "query_type": "comparison",
+      "sql_pattern": "Multiple SELECT COUNT queries"
+    },
+    {
+      "query": "What is hypertension?",
+      "relevant_docs": [],
+      "expected_route": "general",
+      "ground_truth_answer": "Hypertension is high blood pressure, a condition where the force of blood against artery walls is too high.",
+      "query_type": "general_definition",
+      "sql_pattern": null
+    },
+    {
+      "query": "What are the symptoms of diabetes?",
+      "relevant_docs": [],
+      "expected_route": "general",
+      "ground_truth_answer": "Common diabetes symptoms include increased thirst, frequent urination, extreme fatigue, and blurred vision.",
+      "query_type": "general_symptoms",
+      "sql_pattern": null
+    },
+    {
+      "query": "How does the heart work?",
+      "relevant_docs": [],
+      "expected_route": "general",
+      "ground_truth_answer": "The heart pumps blood through a network of arteries and veins, delivering oxygen and nutrients to the body.",
+      "query_type": "general_anatomy",
+      "sql_pattern": null
+    },
+    {
+      "query": "What is a CT scan used for?",
+      "relevant_docs": [],
+      "expected_route": "general",
+      "ground_truth_answer": "CT scans create detailed cross-sectional images of the body to help diagnose diseases and injuries.",
+      "query_type": "general_procedure",
+      "sql_pattern": null
+    },
+    {
+      "query": "What time is it?",
+      "relevant_docs": [],
+      "expected_route": "database",
+      "ground_truth_answer": "Current time from system",
+      "query_type": "datetime_time",
+      "sql_pattern": null,
+      "requires_tool": "get_current_time"
+    },
+    {
+      "query": "What is today's date?",
+      "relevant_docs": [],
+      "expected_route": "database",
+      "ground_truth_answer": "Current date from system",
+      "query_type": "datetime_date",
+      "sql_pattern": null,
+      "requires_tool": "get_current_date"
+    },
+    {
+      "query": "What is the current date and time?",
+      "relevant_docs": [],
+      "expected_route": "database",
+      "ground_truth_answer": "Current datetime from system",
+      "query_type": "datetime_full",
+      "sql_pattern": null,
+      "requires_tool": "get_current_datetime"
+    },
+    {
+      "query": "Hello, how are you?",
+      "relevant_docs": [],
+      "expected_route": "general",
+      "ground_truth_answer": "Greeting response",
+      "query_type": "greeting",
+      "sql_pattern": null
+    },
+    {
+      "query": "Thanks for your help!",
+      "relevant_docs": [],
+      "expected_route": "general",
+      "ground_truth_answer": "Acknowledgment response",
+      "query_type": "acknowledgment",
+      "sql_pattern": null
+    },
+    {
+      "query": "Show me all doctors",
+      "relevant_docs": [],
+      "expected_route": "database",
+      "ground_truth_answer": "List of all 500 doctors",
+      "query_type": "list_all",
+      "sql_pattern": "SELECT * FROM doctors"
+    },
+    {
+      "query": "What specialties are available?",
+      "relevant_docs": [
+        "urology",
+        "oncology",
+        "pediatrics",
+        "cardiology",
+        "endocrinology",
+        "dermatology",
+        "neurology",
+        "orthopedics",
+        "psychiatry",
+        "gastroenterology"
+      ],
+      "expected_route": "database",
+      "ground_truth_answer": "Available specialties: urology, oncology, pediatrics, cardiology, endocrinology...",
+      "query_type": "list_specialties",
+      "sql_pattern": "SELECT DISTINCT specialty FROM doctors"
+    }
+  ]
+}
