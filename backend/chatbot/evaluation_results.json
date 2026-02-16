@@ -1,19 +1,27 @@
 {
-  "evaluation_date": "2026-02-15T16:01:11.912408",
+  "evaluation_date": "2026-02-16T11:19:05.696276",
   "dataset": "evaluation_dataset.json",
-  "has_api_key": false,
+  "has_api_key": true,
   "summary": {
     "status": "complete",
     "key_metrics": {
       "retrieval": {
-        "recall@10": 0.8709677419354839,
-        "mrr": 0.8709677419354839,
-        "ndcg@10": 0.8709677419354839
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
       },
       "retrieval_improvement": {
-        "recall@10_improvement": 0,
-        "recall@10_pct": 0
-      }
+        "recall@10_improvement": 0.0,
+        "recall@10_pct": 0.0
+      },
+      "latency": {
+        "p50": 7.152554154396057,
+        "p95": 10.950423336029052,
+        "p99": 12.757537662982942,
+        "mean": 7.401422443389893
+      },
+      "routing_accuracy": 100.0,
+      "sql_success_rate": 58.333333333333336
     }
   },
   "retrieval": {
@@ -25,35 +33,1314 @@
       5,
       10
     ],
-    "baseline": {},
-    "hybrid": {
-      "retriever": "BM25 Only",
+    "baseline": {
+      "retriever": "Vector Only (Baseline)",
       "num_queries": 93,
       "recall": {
-        "recall@1": 0.8655913978494624,
-        "recall@3": 0.8709677419354839,
-        "recall@5": 0.8709677419354839,
-        "recall@10": 0.8709677419354839
+        "recall@1": 0.9849462365591397,
+        "recall@3": 0.9924731182795699,
+        "recall@5": 0.9946236559139785,
+        "recall@10": 1.0
       },
-      "mrr": 0.8709677419354839,
+      "mrr": 1.0,
       "ndcg": {
-        "ndcg@1": 0.8709677419354839,
-        "ndcg@3": 0.8709677419354839,
-        "ndcg@5": 0.8709677419354839,
-        "ndcg@10": 0.8709677419354839
+        "ndcg@1": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "ndcg@10": 1.0
       }
     },
-    "improvement": {}
+    "hybrid": {
+      "retriever": "Hybrid (BM25 + Vector)",
+      "num_queries": 93,
+      "recall": {
+        "recall@1": 0.9849462365591397,
+        "recall@3": 0.9924731182795699,
+        "recall@5": 0.9946236559139785,
+        "recall@10": 1.0
+      },
+      "mrr": 1.0,
+      "ndcg": {
+        "ndcg@1": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "ndcg@10": 1.0
+      }
+    },
+    "improvement": {
+      "recall@1_improvement": 0.0,
+      "recall@1_pct": 0.0,
+      "recall@3_improvement": 0.0,
+      "recall@3_pct": 0.0,
+      "recall@5_improvement": 0.0,
+      "recall@5_pct": 0.0,
+      "recall@10_improvement": 0.0,
+      "recall@10_pct": 0.0,
+      "mrr_improvement": 0.0,
+      "mrr_pct": 0.0
+    }
   },
   "chatbot": {
-    "error": "No API key available"
+    "evaluation_date": "2026-02-16T10:54:13.285932",
+    "dataset": "evaluation_dataset.json",
+    "total_queries_in_dataset": 105,
+    "queries_tested": 100,
+    "metrics": {
+      "latency": {
+        "total_queries": 100,
+        "successful_queries": 100,
+        "failed_queries": 0,
+        "failure_rate": 0.0,
+        "latency_by_type": {
+          "general": {
+            "count": 4,
+            "mean": 7.4708685874938965,
+            "median": 6.129027724266052,
+            "p50": 6.129027724266052,
+            "p95": 11.802751755714414,
+            "p99": 12.564613385200499,
+            "min": 4.87034010887146,
+            "max": 12.755078792572021
+          },
+          "database": {
+            "count": 94,
+            "mean": 7.510310591535365,
+            "median": 7.2146570682525635,
+            "p50": 7.2146570682525635,
+            "p95": 10.761920177936553,
+            "p99": 11.700851109027854,
+            "min": 4.856205701828003,
+            "max": 13.00096583366394
+          },
+          "datetime": {
+            "count": 2,
+            "mean": 2.1447871923446655,
+            "median": 2.1447871923446655,
+            "p50": 2.1447871923446655,
+            "p95": 2.1752981781959533,
+            "p99": 2.178010265827179,
+            "min": 2.1108860969543457,
+            "max": 2.1786882877349854
+          },
+          "all": {
+            "count": 100,
+            "mean": 7.401422443389893,
+            "median": 7.152554154396057,
+            "p50": 7.152554154396057,
+            "p95": 10.950423336029052,
+            "p99": 12.757537662982942,
+            "min": 2.1108860969543457,
+            "max": 13.00096583366394
+          }
+        },
+        "overall_latency": {},
+        "failed_queries_details": []
+      },
+      "routing_accuracy": {
+        "total_queries": 100,
+        "correct_routes": 100,
+        "incorrect_routes": 0,
+        "accuracy": 1.0,
+        "accuracy_pct": 100.0,
+        "details": [
+          {
+            "query": "How many doctors do we have?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "What is the total number of doctors?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "How many doctors specialize in urology?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "List all urology doctors",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find urology specialists",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Show me doctors in urology",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Count of urology doctors",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "How many doctors specialize in oncology?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "List all oncology doctors",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find oncology specialists",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Show me doctors in oncology",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Count of oncology doctors",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "How many doctors specialize in pediatrics?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "List all pediatrics doctors",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find pediatrics specialists",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Show me doctors in pediatrics",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Count of pediatrics doctors",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "How many doctors specialize in cardiology?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "List all cardiology doctors",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find cardiology specialists",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Show me doctors in cardiology",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Count of cardiology doctors",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "How many doctors specialize in endocrinology?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "List all endocrinology doctors",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find endocrinology specialists",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Show me doctors in endocrinology",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Count of endocrinology doctors",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "How many doctors specialize in dermatology?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "List all dermatology doctors",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find dermatology specialists",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Show me doctors in dermatology",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Count of dermatology doctors",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "How many doctors specialize in neurology?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "List all neurology doctors",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find neurology specialists",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Show me doctors in neurology",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Count of neurology doctors",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "How many doctors specialize in orthopedics?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "List all orthopedics doctors",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find orthopedics specialists",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Show me doctors in orthopedics",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Count of orthopedics doctors",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "How many doctors specialize in psychiatry?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "List all psychiatry doctors",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find psychiatry specialists",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Show me doctors in psychiatry",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Count of psychiatry doctors",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "How many doctors specialize in gastroenterology?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "List all gastroenterology doctors",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find gastroenterology specialists",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Show me doctors in gastroenterology",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Count of gastroenterology doctors",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find doctors with immunizations skills",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Who has immunizations expertise?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find doctors with skin biopsy skills",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Who has skin biopsy expertise?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find doctors with psychiatric eval skills",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Who has psychiatric eval expertise?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find doctors with upper endoscopy skills",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Who has upper endoscopy expertise?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find doctors with echocardiogram skills",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Who has echocardiogram expertise?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find doctors with joint replacement skills",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Who has joint replacement expertise?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find doctors with CBT skills",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Who has CBT expertise?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find doctors with stress test skills",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Who has stress test expertise?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find doctors with lumbar puncture skills",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Who has lumbar puncture expertise?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find doctors with cystoscopy skills",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Who has cystoscopy expertise?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find doctors with fracture fixation skills",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Who has fracture fixation expertise?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find doctors with colonoscopy skills",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Who has colonoscopy expertise?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find doctors with EMG skills",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Who has EMG expertise?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find doctors with liver biopsy skills",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Who has liver biopsy expertise?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find doctors with well-child exam skills",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Who has well-child exam expertise?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find doctors with radiation planning skills",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Who has radiation planning expertise?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find doctors with tumor biopsy skills",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Who has tumor biopsy expertise?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find doctors with medication management skills",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Who has medication management expertise?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find doctors with EEG skills",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Who has EEG expertise?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Find doctors with urinalysis skills",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Who has urinalysis expertise?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "How many doctors work on Monday and specialize in urology?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "Compare the number of urology vs oncology doctors",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "What is hypertension?",
+            "expected": "general",
+            "actual": "general",
+            "correct": true
+          },
+          {
+            "query": "What are the symptoms of diabetes?",
+            "expected": "general",
+            "actual": "general",
+            "correct": true
+          },
+          {
+            "query": "How does the heart work?",
+            "expected": "general",
+            "actual": "general",
+            "correct": true
+          },
+          {
+            "query": "What is a CT scan used for?",
+            "expected": "general",
+            "actual": "general",
+            "correct": true
+          },
+          {
+            "query": "What time is it?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          },
+          {
+            "query": "What is today's date?",
+            "expected": "database",
+            "actual": "database",
+            "correct": true
+          }
+        ]
+      },
+      "sql_success": {
+        "total_sql_queries": 96,
+        "successful_queries": 56,
+        "failed_queries": 40,
+        "success_rate": 0.5833333333333334,
+        "success_rate_pct": 58.333333333333336,
+        "details": [
+          {
+            "query": "How many doctors do we have?",
+            "success": true,
+            "response_length": 49,
+            "response_preview": "There are a total of 500 doctors in the database."
+          },
+          {
+            "query": "What is the total number of doctors?",
+            "success": true,
+            "response_length": 35,
+            "response_preview": "The total number of doctors is 500."
+          },
+          {
+            "query": "How many doctors specialize in urology?",
+            "success": true,
+            "response_length": 47,
+            "response_preview": "There are 44 doctors who specialize in urology."
+          },
+          {
+            "query": "List all urology doctors",
+            "success": true,
+            "response_length": 183,
+            "response_preview": "Here are some urology doctors:\n\n1. Kara Lane\n2. Ruben Curtis\n3. Emily Ferguson\n4. Jerome Simmons\n5. "
+          },
+          {
+            "query": "Find urology specialists",
+            "success": true,
+            "response_length": 118,
+            "response_preview": "Here are some urology specialists:\n\n1. Kara Lane\n2. Ruben Curtis\n3. Emily Ferguson\n4. Jerome Simmons"
+          },
+          {
+            "query": "Show me doctors in urology",
+            "success": true,
+            "response_length": 128,
+            "response_preview": "Here are some doctors who specialize in urology:\n\n1. Amy Stanton\n2. Amy Wilson\n3. Anthony Colon\n4. A"
+          },
+          {
+            "query": "Count of urology doctors",
+            "success": true,
+            "response_length": 45,
+            "response_preview": "There are 44 doctors specializing in urology."
+          },
+          {
+            "query": "How many doctors specialize in oncology?",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "List all oncology doctors",
+            "success": true,
+            "response_length": 115,
+            "response_preview": "Here are the oncology doctors:\n\n1. Adam Morgan\n2. Allen Davis\n3. Anna Myers\n4. Anthony Campbell\n5. B"
+          },
+          {
+            "query": "Find oncology specialists",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Show me doctors in oncology",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Count of oncology doctors",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "How many doctors specialize in pediatrics?",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "List all pediatrics doctors",
+            "success": true,
+            "response_length": 185,
+            "response_preview": "Here are some of the pediatric doctors:\n\n1. Mark Marshall\n2. Susan Young\n3. Charles Brown\n4. Erin Wa"
+          },
+          {
+            "query": "Find pediatrics specialists",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Show me doctors in pediatrics",
+            "success": true,
+            "response_length": 198,
+            "response_preview": "Here are some doctors who specialize in pediatrics:\n\n1. **Mark Marshall** (ID: 14)\n2. **Susan Young*"
+          },
+          {
+            "query": "Count of pediatrics doctors",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "How many doctors specialize in cardiology?",
+            "success": true,
+            "response_length": 50,
+            "response_preview": "There are 60 doctors who specialize in cardiology."
+          },
+          {
+            "query": "List all cardiology doctors",
+            "success": true,
+            "response_length": 114,
+            "response_preview": "Here are the cardiology doctors:\n\n1. Andrea Terry\n2. Anita Waters\n3. Ann Patton\n4. Anthony Johnson\n5"
+          },
+          {
+            "query": "Find cardiology specialists",
+            "success": true,
+            "response_length": 119,
+            "response_preview": "Here are some cardiology specialists:\n\n1. Andrea Terry\n2. Anita Waters\n3. Ann Patton\n4. Anthony John"
+          },
+          {
+            "query": "Show me doctors in cardiology",
+            "success": true,
+            "response_length": 131,
+            "response_preview": "Here are some doctors specializing in cardiology:\n\n1. Andrea Terry\n2. Anita Waters\n3. Ann Patton\n4. "
+          },
+          {
+            "query": "Count of cardiology doctors",
+            "success": true,
+            "response_length": 48,
+            "response_preview": "There are 60 cardiology doctors in the database."
+          },
+          {
+            "query": "How many doctors specialize in endocrinology?",
+            "success": true,
+            "response_length": 53,
+            "response_preview": "There are 44 doctors who specialize in endocrinology."
+          },
+          {
+            "query": "List all endocrinology doctors",
+            "success": true,
+            "response_length": 191,
+            "response_preview": "Here are some endocrinology doctors:\n\n1. Dana Duke\n2. Kristi Wilson\n3. Christopher Melendez\n4. Micha"
+          },
+          {
+            "query": "Find endocrinology specialists",
+            "success": true,
+            "response_length": 200,
+            "response_preview": "Here are some endocrinology specialists:\n\n1. Dana Duke\n2. Kristi Wilson\n3. Christopher Melendez\n4. M"
+          },
+          {
+            "query": "Show me doctors in endocrinology",
+            "success": true,
+            "response_length": 212,
+            "response_preview": "Here are some doctors specializing in endocrinology:\n\n1. Dana Duke\n2. Kristi Wilson\n3. Christopher M"
+          },
+          {
+            "query": "Count of endocrinology doctors",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "How many doctors specialize in dermatology?",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "List all dermatology doctors",
+            "success": true,
+            "response_length": 130,
+            "response_preview": "Here are some dermatology doctors:\n\n1. Christopher Alexander\n2. Alexis Hunt\n3. Melissa Wilson\n4. Tif"
+          },
+          {
+            "query": "Find dermatology specialists",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Show me doctors in dermatology",
+            "success": true,
+            "response_length": 131,
+            "response_preview": "Here are some doctors specializing in dermatology:\n\n1. Alexis Hunt\n2. Amy Rocha\n3. Andrew Foley\n4. A"
+          },
+          {
+            "query": "Count of dermatology doctors",
+            "success": true,
+            "response_length": 33,
+            "response_preview": "There are 47 dermatology doctors."
+          },
+          {
+            "query": "How many doctors specialize in neurology?",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "List all neurology doctors",
+            "success": true,
+            "response_length": 116,
+            "response_preview": "Here are the neurology doctors:\n\n1. Jonathan Frey\n2. Aaron Woods\n3. Patrick Mosley\n4. Peter Brennan\n"
+          },
+          {
+            "query": "Find neurology specialists",
+            "success": true,
+            "response_length": 121,
+            "response_preview": "Here are some neurology specialists:\n\n1. Jonathan Frey\n2. Aaron Woods\n3. Patrick Mosley\n4. Peter Bre"
+          },
+          {
+            "query": "Show me doctors in neurology",
+            "success": true,
+            "response_length": 133,
+            "response_preview": "Here are some doctors specializing in neurology:\n\n1. Jonathan Frey\n2. Aaron Woods\n3. Patrick Mosley\n"
+          },
+          {
+            "query": "Count of neurology doctors",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "How many doctors specialize in orthopedics?",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "List all orthopedics doctors",
+            "success": true,
+            "response_length": 116,
+            "response_preview": "Here are some orthopedic doctors:\n\n1. Larry Hampton\n2. Tamara Myers\n3. Tracy Kirk\n4. Bruce Stewart\n5"
+          },
+          {
+            "query": "Find orthopedics specialists",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Show me doctors in orthopedics",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Count of orthopedics doctors",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "How many doctors specialize in psychiatry?",
+            "success": true,
+            "response_length": 50,
+            "response_preview": "There are 44 doctors who specialize in psychiatry."
+          },
+          {
+            "query": "List all psychiatry doctors",
+            "success": true,
+            "response_length": 177,
+            "response_preview": "Here are some psychiatry doctors:\n\n1. Amy Velez\n2. Shannon Knox\n3. Melissa Charles\n4. Alexandria Cos"
+          },
+          {
+            "query": "Find psychiatry specialists",
+            "success": true,
+            "response_length": 123,
+            "response_preview": "Here are some psychiatry specialists:\n\n1. Alexandria Costa\n2. Amanda Randolph\n3. Amy Velez\n4. Anne M"
+          },
+          {
+            "query": "Show me doctors in psychiatry",
+            "success": true,
+            "response_length": 134,
+            "response_preview": "Here are the doctors specializing in psychiatry:\n\n1. Amy Velez\n2. Shannon Knox\n3. Melissa Charles\n4."
+          },
+          {
+            "query": "Count of psychiatry doctors",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "How many doctors specialize in gastroenterology?",
+            "success": true,
+            "response_length": 56,
+            "response_preview": "There are 57 doctors who specialize in gastroenterology."
+          },
+          {
+            "query": "List all gastroenterology doctors",
+            "success": true,
+            "response_length": 122,
+            "response_preview": "Here are the gastroenterology doctors:\n\n1. Dustin Mann\n2. Kelly Lewis\n3. Gary Petersen\n4. Douglas Su"
+          },
+          {
+            "query": "Find gastroenterology specialists",
+            "success": true,
+            "response_length": 136,
+            "response_preview": "Here are some gastroenterology specialists:\n\n1. Alexander Ford\n2. Alexander Hines\n3. Alexis Jackson\n"
+          },
+          {
+            "query": "Show me doctors in gastroenterology",
+            "success": true,
+            "response_length": 139,
+            "response_preview": "Here are some doctors specializing in gastroenterology:\n\n1. Dustin Mann\n2. Kelly Lewis\n3. Gary Peter"
+          },
+          {
+            "query": "Count of gastroenterology doctors",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Find doctors with immunizations skills",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Who has immunizations expertise?",
+            "success": true,
+            "response_length": 247,
+            "response_preview": "The doctors with immunizations expertise are:\n\n1. Mark Marshall - Specialty: Pediatrics\n2. Susan You"
+          },
+          {
+            "query": "Find doctors with skin biopsy skills",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Who has skin biopsy expertise?",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Find doctors with psychiatric eval skills",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Who has psychiatric eval expertise?",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Find doctors with upper endoscopy skills",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Who has upper endoscopy expertise?",
+            "success": true,
+            "response_length": 242,
+            "response_preview": "The doctors who have expertise in upper endoscopy are:\n\n1. Alexander Ford (Gastroenterology)\n2. Alex"
+          },
+          {
+            "query": "Find doctors with echocardiogram skills",
+            "success": true,
+            "response_length": 267,
+            "response_preview": "Here are some doctors skilled in echocardiogram:\n\n1. Jessica Chung - Cardiology\n2. Jeremy Ferguson -"
+          },
+          {
+            "query": "Who has echocardiogram expertise?",
+            "success": true,
+            "response_length": 342,
+            "response_preview": "The following doctors have expertise in echocardiogram:\n\n1. **Jessica Chung** - Specialty: Cardiolog"
+          },
+          {
+            "query": "Find doctors with joint replacement skills",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Who has joint replacement expertise?",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Find doctors with CBT skills",
+            "success": true,
+            "response_length": 229,
+            "response_preview": "I found several doctors with CBT skills. Here are their names and specialties:\n\n1. Amy Velez - Psych"
+          },
+          {
+            "query": "Who has CBT expertise?",
+            "success": true,
+            "response_length": 293,
+            "response_preview": "Here are the doctors with expertise in CBT (Cognitive Behavioral Therapy):\n\n1. Amy Velez - Psychiatr"
+          },
+          {
+            "query": "Find doctors with stress test skills",
+            "success": true,
+            "response_length": 265,
+            "response_preview": "Here are some doctors with stress test skills:\n\n1. Andrea Terry - Cardiology\n2. Anita Waters - Cardi"
+          },
+          {
+            "query": "Who has stress test expertise?",
+            "success": true,
+            "response_length": 204,
+            "response_preview": "Here are individuals with stress test expertise:\n\n1. Jessica Chung\n2. Jeremy Ferguson\n3. Jessica Joh"
+          },
+          {
+            "query": "Find doctors with lumbar puncture skills",
+            "success": true,
+            "response_length": 278,
+            "response_preview": "Here are some doctors with lumbar puncture skills:\n\n1. **Aaron Woods** - Specialty: Neurology\n2. **A"
+          },
+          {
+            "query": "Who has lumbar puncture expertise?",
+            "success": true,
+            "response_length": 259,
+            "response_preview": "Here are some doctors with expertise in lumbar puncture:\n\n1. Jonathan Frey - Neurology\n2. Aaron Wood"
+          },
+          {
+            "query": "Find doctors with cystoscopy skills",
+            "success": true,
+            "response_length": 198,
+            "response_preview": "Here are the doctors with cystoscopy skills:\n\n1. **Kara Lane** - Urology\n2. **Ruben Curtis** - Urolo"
+          },
+          {
+            "query": "Who has cystoscopy expertise?",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Find doctors with fracture fixation skills",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Who has fracture fixation expertise?",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Find doctors with colonoscopy skills",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Who has colonoscopy expertise?",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Find doctors with EMG skills",
+            "success": true,
+            "response_length": 332,
+            "response_preview": "I found several doctors with EMG skills. Here are 5 of them:\n\n1. Jonathan Frey - Specialty: Neurolog"
+          },
+          {
+            "query": "Who has EMG expertise?",
+            "success": true,
+            "response_length": 186,
+            "response_preview": "The following doctors have EMG expertise:\n\n1. Jonathan Frey - Neurology\n2. Aaron Woods - Neurology\n3"
+          },
+          {
+            "query": "Find doctors with liver biopsy skills",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Who has liver biopsy expertise?",
+            "success": true,
+            "response_length": 232,
+            "response_preview": "The following doctors have expertise in liver biopsy:\n\n1. Dustin Mann - Gastroenterology\n2. Kelly Le"
+          },
+          {
+            "query": "Find doctors with well-child exam skills",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Who has well-child exam expertise?",
+            "success": true,
+            "response_length": 203,
+            "response_preview": "The doctors with well-child exam expertise include:\n\n1. Mark Marshall - Pediatrics\n2. Susan Young - "
+          },
+          {
+            "query": "Find doctors with radiation planning skills",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Who has radiation planning expertise?",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Find doctors with tumor biopsy skills",
+            "success": true,
+            "response_length": 262,
+            "response_preview": "Here are some doctors with tumor biopsy skills:\n\n1. **Adam Morgan** - Specialty: Oncology\n2. **Allen"
+          },
+          {
+            "query": "Who has tumor biopsy expertise?",
+            "success": true,
+            "response_length": 192,
+            "response_preview": "The following doctors have expertise in tumor biopsy:\n\n1. Daniel David - Oncology\n2. David Bell - On"
+          },
+          {
+            "query": "Find doctors with medication management skills",
+            "success": true,
+            "response_length": 281,
+            "response_preview": "Here are the doctors with medication management skills:\n\n1. **Amy Velez** - Specialty: Psychiatry\n2."
+          },
+          {
+            "query": "Who has medication management expertise?",
+            "success": true,
+            "response_length": 213,
+            "response_preview": "The following doctors have expertise in medication management:\n\n1. Amy Velez - Psychiatry\n2. Shannon"
+          },
+          {
+            "query": "Find doctors with EEG skills",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Who has EEG expertise?",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Find doctors with urinalysis skills",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Who has urinalysis expertise?",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "How many doctors work on Monday and specialize in urology?",
+            "success": false,
+            "response_length": 47,
+            "response_preview": "Sorry, need more steps to process this request."
+          },
+          {
+            "query": "Compare the number of urology vs oncology doctors",
+            "success": true,
+            "response_length": 53,
+            "response_preview": "There are 44 urology doctors and 49 oncology doctors."
+          },
+          {
+            "query": "What time is it?",
+            "success": true,
+            "response_length": 29,
+            "response_preview": "The current time is 11:19 AM."
+          },
+          {
+            "query": "What is today's date?",
+            "success": true,
+            "response_length": 42,
+            "response_preview": "Today's date is Monday, February 16, 2026."
+          }
+        ]
+      }
+    }
   },
   "success_criteria": {
     "met": [
+      "\u2705 Routing accuracy > 95% (100.0%)",
       "\u26a0\ufe0f  Recall@10 improvement < 5% (+0.0%)",
-      "\u2705 MRR > 0.7 (0.8710)"
+      "\u2705 MRR > 0.7 (1.0000)"
     ],
-    "failed": [],
-    "all_met": true
+    "failed": [
+      "\u274c P95 latency >= 5s (10.950s)"
+    ],
+    "all_met": false
   }
 }

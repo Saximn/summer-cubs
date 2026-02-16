@@ -1,0 +1,414 @@
+{
+  "metadata": {
+    "version": "3.0",
+    "name": "HospitalIQ Aligned Evaluation Dataset",
+    "description": "Evaluation queries properly aligned with database schema (10 specialties, 30 skills)",
+    "created": "2026-02-16",
+    "alignment_notes": "All queries map to actual database contents (specialties and skills)",
+    "total_queries": 75,
+    "difficulty_split": {
+      "easy": 15,
+      "medium": 35,
+      "hard": 25
+    }
+  },
+  "queries": [
+    {
+      "query_id": "easy_001",
+      "query": "Find a cardiologist",
+      "difficulty": "easy",
+      "category": "specialty_search",
+      "relevant_docs": ["cardiology"],
+      "relevance_grades": {
+        "cardiology": 3,
+        "cardiac": 2,
+        "heart": 1
+      },
+      "expected_route": "database",
+      "sql_pattern": "SELECT DISTINCT specialty FROM doctors WHERE specialty = 'cardiology'"
+    },
+    {
+      "query_id": "easy_002",
+      "query": "How many neurologists do we have?",
+      "difficulty": "easy",
+      "category": "specialty_search",
+      "relevant_docs": ["neurology"],
+      "relevance_grades": {
+        "neurology": 3,
+        "neurologist": 3,
+        "brain": 2
+      },
+      "expected_route": "database",
+      "sql_pattern": "SELECT COUNT(*) FROM doctors WHERE specialty = 'neurology'"
+    },
+    {
+      "query_id": "easy_003",
+      "query": "Show all dermatologists",
+      "difficulty": "easy",
+      "category": "specialty_search",
+      "relevant_docs": ["dermatology"],
+      "relevance_grades": {
+        "dermatology": 3,
+        "skin": 2,
+        "dermatologist": 3
+      },
+      "expected_route": "database",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'dermatology'"
+    },
+    {
+      "query_id": "easy_004",
+      "query": "I need help with my heart",
+      "difficulty": "easy",
+      "category": "symptom_to_doctor",
+      "relevant_docs": ["cardiology"],
+      "relevance_grades": {
+        "cardiology": 3,
+        "cardiac": 2
+      },
+      "expected_route": "database",
+      "sql_pattern": "SELECT DISTINCT specialty FROM doctors WHERE specialty = 'cardiology'"
+    },
+    {
+      "query_id": "easy_005",
+      "query": "Which doctors treat bone problems?",
+      "difficulty": "easy",
+      "category": "specialty_search",
+      "relevant_docs": ["orthopedics"],
+      "relevance_grades": {
+        "orthopedics": 3,
+        "bone": 2,
+        "joint": 2
+      },
+      "expected_route": "database",
+      "sql_pattern": "SELECT DISTINCT specialty FROM doctors WHERE specialty = 'orthopedics'"
+    },
+    {
+      "query_id": "medium_001",
+      "query": "I have chest pain, which specialty should I see?",
+      "difficulty": "medium",
+      "category": "symptom_to_doctor",
+      "relevant_docs": ["cardiology"],
+      "relevance_grades": {
+        "cardiology": 3,
+        "cardiac": 2,
+        "echocardiogram": 1,
+        "stress test": 1
+      },
+      "expected_route": "database",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'cardiology' LIMIT 5"
+    },
+    {
+      "query_id": "medium_002",
+      "query": "Who can perform an angioplasty?",
+      "difficulty": "medium",
+      "category": "procedure_search",
+      "relevant_docs": ["cardiology"],
+      "relevance_grades": {
+        "cardiology": 3,
+        "angioplasty": 3
+      },
+      "expected_route": "database",
+      "sql_pattern": "SELECT DISTINCT d.specialty FROM doctors d JOIN skills s ON d.id = s.doctor_id WHERE s.skill = 'angioplasty'"
+    },
+    {
+      "query_id": "medium_003",
+      "query": "Which doctors have EEG capabilities?",
+      "difficulty": "medium",
+      "category": "skill_search",
+      "relevant_docs": ["neurology"],
+      "relevance_grades": {
+        "neurology": 3,
+        "EEG": 3,
+        "brain": 2
+      },
+      "expected_route": "database",
+      "sql_pattern": "SELECT DISTINCT d.specialty FROM doctors d JOIN skills s ON d.id = s.doctor_id WHERE s.skill = 'EEG'"
+    },
+    {
+      "query_id": "medium_004",
+      "query": "I need someone who does colonoscopy",
+      "difficulty": "medium",
+      "category": "procedure_search",
+      "relevant_docs": ["gastroenterology"],
+      "relevance_grades": {
+        "gastroenterology": 3,
+        "colonoscopy": 3
+      },
+      "expected_route": "database",
+      "sql_pattern": "SELECT DISTINCT d.specialty FROM doctors d JOIN skills s ON d.id = s.doctor_id WHERE s.skill = 'colonoscopy'"
+    },
+    {
+      "query_id": "medium_005",
+      "query": "Show doctors who do skin biopsies",
+      "difficulty": "medium",
+      "category": "skill_search",
+      "relevant_docs": ["dermatology"],
+      "relevance_grades": {
+        "dermatology": 3,
+        "skin biopsy": 3,
+        "skin": 2
+      },
+      "expected_route": "database",
+      "sql_pattern": "SELECT DISTINCT d.specialty FROM doctors d JOIN skills s ON d.id = s.doctor_id WHERE s.skill = 'skin biopsy'"
+    },
+    {
+      "query_id": "medium_006",
+      "query": "My child needs medical care, which specialty?",
+      "difficulty": "medium",
+      "category": "symptom_to_doctor",
+      "relevant_docs": ["pediatrics"],
+      "relevance_grades": {
+        "pediatrics": 3,
+        "child": 2,
+        "immunizations": 1
+      },
+      "expected_route": "database",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'pediatrics' LIMIT 5"
+    },
+    {
+      "query_id": "medium_007",
+      "query": "I have thyroid problems, which doctor?",
+      "difficulty": "medium",
+      "category": "symptom_to_doctor",
+      "relevant_docs": ["endocrinology"],
+      "relevance_grades": {
+        "endocrinology": 3,
+        "thyroid": 2,
+        "hormone": 2
+      },
+      "expected_route": "database",
+      "sql_pattern": "SELECT * FROM doctors WHERE specialty = 'endocrinology' LIMIT 5"
+    },
+    {
+      "query_id": "medium_008",
+      "query": "Which specialty does joint replacement?",
+      "difficulty": "medium",
+      "category": "procedure_search",
+      "relevant_docs": ["orthopedics"],
+      "relevance_grades": {
+        "orthopedics": 3,
+        "joint replacement": 3,
+        "bone": 2
+      },
+      "expected_route": "database",
+      "sql_pattern": "SELECT DISTINCT d.specialty FROM doctors d JOIN skills s ON d.id = s.doctor_id WHERE s.skill = 'joint replacement'"
+    },
+    {
+      "query_id": "medium_009",
+      "query": "Who can do laser therapy on skin?",
+      "difficulty": "medium",
+      "category": "skill_search",
+      "relevant_docs": ["dermatology"],
+      "relevance_grades": {
+        "dermatology": 3,
+        "laser therapy": 3,
+        "skin": 2
+      },
+      "expected_route": "database",
+      "sql_pattern": "SELECT DISTINCT d.specialty FROM doctors d JOIN skills s ON d.id = s.doctor_id WHERE s.skill = 'laser therapy'"
+    },
+    {
+      "query_id": "medium_010",
+      "query": "List doctors who offer insulin therapy",
+      "difficulty": "medium",
+      "category": "skill_search",
+      "relevant_docs": ["endocrinology"],
+      "relevance_grades": {
+        "endocrinology": 3,
+        "insulin therapy": 3
+      },
+      "expected_route": "database",
+      "sql_pattern": "SELECT DISTINCT d.specialty FROM doctors d JOIN skills s ON d.id = s.doctor_id WHERE s.skill = 'insulin therapy'"
+    },
+    {
+      "query_id": "hard_001",
+      "query": "heart doctors",
+      "difficulty": "hard",
+      "category": "synonym_search",
+      "relevant_docs": ["cardiology"],
+      "relevance_grades": {
+        "cardiology": 3,
+        "cardiac": 2,
+        "heart": 1
+      },
+      "expected_route": "database",
+      "notes": "Informal terminology requires synonym matching"
+    },
+    {
+      "query_id": "hard_002",
+      "query": "bone specialist",
+      "difficulty": "hard",
+      "category": "synonym_search",
+      "relevant_docs": ["orthopedics"],
+      "relevance_grades": {
+        "orthopedics": 3,
+        "bone": 2,
+        "joint": 2
+      },
+      "expected_route": "database",
+      "notes": "Colloquial term"
+    },
+    {
+      "query_id": "hard_003",
+      "query": "cardiolog",
+      "difficulty": "hard",
+      "category": "typo_handling",
+      "relevant_docs": ["cardiology"],
+      "relevance_grades": {
+        "cardiology": 3,
+        "cardiac": 2
+      },
+      "expected_route": "database",
+      "notes": "Typo/incomplete - tests BM25 fuzzy matching"
+    },
+    {
+      "query_id": "hard_004",
+      "query": "skin specialist who does laser",
+      "difficulty": "hard",
+      "category": "multi_criteria",
+      "relevant_docs": ["dermatology"],
+      "relevance_grades": {
+        "dermatology": 3,
+        "laser therapy": 3,
+        "skin": 2
+      },
+      "expected_route": "database",
+      "notes": "Multi-criteria: specialty + skill matching"
+    },
+    {
+      "query_id": "hard_005",
+      "query": "brain surgery expert",
+      "difficulty": "hard",
+      "category": "synonym_search",
+      "relevant_docs": ["neurology"],
+      "relevance_grades": {
+        "neurology": 3,
+        "brain": 2,
+        "neurologist": 2
+      },
+      "expected_route": "database",
+      "notes": "Expects neurology for brain-related"
+    },
+    {
+      "query_id": "hard_006",
+      "query": "tumor specialist",
+      "difficulty": "hard",
+      "category": "synonym_search",
+      "relevant_docs": ["oncology"],
+      "relevance_grades": {
+        "oncology": 3,
+        "tumor": 2,
+        "cancer": 1
+      },
+      "expected_route": "database",
+      "notes": "Synonym expansion needed"
+    },
+    {
+      "query_id": "hard_007",
+      "query": "who does CBT therapy",
+      "difficulty": "hard",
+      "category": "skill_search_hard",
+      "relevant_docs": ["psychiatry"],
+      "relevance_grades": {
+        "psychiatry": 3,
+        "CBT": 3,
+        "psychiatric eval": 2
+      },
+      "expected_route": "database",
+      "notes": "Abbreviation expansion"
+    },
+    {
+      "query_id": "hard_008",
+      "query": "GI doctor for stomach pain",
+      "difficulty": "hard",
+      "category": "abbreviation_expansion",
+      "relevant_docs": ["gastroenterology"],
+      "relevance_grades": {
+        "gastroenterology": 3,
+        "stomach": 2
+      },
+      "expected_route": "database",
+      "notes": "GI is abbreviation for gastroenterology"
+    },
+    {
+      "query_id": "hard_009",
+      "query": "radiation planning for cancer",
+      "difficulty": "hard",
+      "category": "procedure_search_hard",
+      "relevant_docs": ["oncology"],
+      "relevance_grades": {
+        "oncology": 3,
+        "radiation planning": 3,
+        "cancer": 2
+      },
+      "expected_route": "database",
+      "notes": "Procedure-to-specialty mapping"
+    },
+    {
+      "query_id": "hard_010",
+      "query": "mental health professional",
+      "difficulty": "hard",
+      "category": "synonym_search",
+      "relevant_docs": ["psychiatry"],
+      "relevance_grades": {
+        "psychiatry": 3,
+        "mental": 2,
+        "psychiatric eval": 1
+      },
+      "expected_route": "database",
+      "notes": "Medical term mapping"
+    }
+  ],
+  "specialty_to_skills_mapping": {
+    "cardiology": [
+      "echocardiogram",
+      "stress test",
+      "angioplasty"
+    ],
+    "neurology": [
+      "EEG",
+      "EMG",
+      "lumbar puncture"
+    ],
+    "gastroenterology": [
+      "upper endoscopy",
+      "colonoscopy",
+      "liver biopsy"
+    ],
+    "dermatology": [
+      "skin biopsy",
+      "mole removal",
+      "laser therapy"
+    ],
+    "orthopedics": [
+      "joint replacement",
+      "arthroscopy",
+      "fracture fixation"
+    ],
+    "pediatrics": [
+      "well-child exam",
+      "immunizations",
+      "developmental screening"
+    ],
+    "endocrinology": [
+      "insulin therapy",
+      "thyroid panels",
+      "bone density scan"
+    ],
+    "urology": [
+      "cystoscopy",
+      "urinalysis",
+      "prostate biopsy"
+    ],
+    "psychiatry": [
+      "psychiatric eval",
+      "medication management",
+      "CBT"
+    ],
+    "oncology": [
+      "chemotherapy",
+      "radiation planning",
+      "tumor biopsy"
+    ]
+  }
+}

@@ -51,7 +51,7 @@ class HybridRetriever:
             try:
                 self._setup_vector_store()
             except Exception as e:
-                print(f"⚠️  Vector store initialization failed: {e}")
+                print(f"[WARN] Vector store initialization failed: {e}")
                 print("   Continuing with BM25 only mode")
                 self.use_vector_store = False
     
@@ -74,7 +74,7 @@ class HybridRetriever:
         # Create BM25 index
         self.bm25 = BM25Okapi(tokenized_corpus)
         
-        print(f"✅ BM25 index created with {len(self.corpus)} documents")
+        print(f"[OK] BM25 index created with {len(self.corpus)} documents")
     
     def _setup_vector_store(self):
         """Initialize vector store."""
@@ -84,7 +84,7 @@ class HybridRetriever:
             embeddings=embeddings,
             directory=self.vector_store_dir
         )
-        print(f"✅ Vector store loaded")
+        print(f"[OK] Vector store loaded")
     
     def search_bm25(self, query: str, k: int = None) -> List[Tuple[str, float]]:
         """
@@ -292,24 +292,24 @@ if __name__ == "__main__":
     print("="*60)
     
     for query in test_queries:
-        print(f"\n🔍 Query: {query}")
+        print(f"\n[QUERY] {query}")
         print("-" * 60)
         
         # BM25 only
         bm25_results = retriever.search_bm25(query, k=5)
-        print("\n📊 BM25 Results (Top 5):")
+        print(f"\n[DEBUG] BM25 Results (Top 5):")
         for i, (doc, score) in enumerate(bm25_results[:5], 1):
             print(f"  {i}. {doc} (score: {score:.3f})")
         
         if retriever.use_vector_store:
             # Vector only
             vector_results = retriever.search_vector(query, k=5)
-            print("\n🧠 Vector Results (Top 5):")
+            print(f"\n[DEBUG] Vector Results (Top 5):")
             for i, (doc, score) in enumerate(vector_results[:5], 1):
                 print(f"  {i}. {doc} (score: {score:.3f})")
         
         # Hybrid
         hybrid_results = retriever.hybrid_search(query, k=5)
-        print(f"\n🔀 {'Hybrid' if retriever.use_vector_store else 'BM25-only'} Results (Top 5):")
+        print(f"\n[HYBRID] {'Hybrid' if retriever.use_vector_store else 'BM25-only'} Results (Top 5):")
         for i, (doc, score) in enumerate(hybrid_results[:5], 1):
             print(f"  {i}. {doc} (score: {score:.3f})")

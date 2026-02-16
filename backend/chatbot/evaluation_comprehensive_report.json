@@ -1,0 +1,75 @@
+{
+  "dataset": "evaluation_dataset_corrected.json",
+  "total_queries": 39,
+  "easy_queries": 10,
+  "medium_queries": 15,
+  "hard_queries": 14,
+  "timestamp": "2024",
+  "retrievers": {
+    "vector_only": {
+      "name": "Vector Embedding Only (Baseline)",
+      "recall_at_10": 0.9487,
+      "mrr": 0.9145,
+      "latency_ms": 172.6,
+      "p95_latency_ms": 230.3,
+      "by_difficulty": {
+        "easy": {
+          "recall_at_10": 1.0,
+          "mrr": 1.0
+        },
+        "medium": {
+          "recall_at_10": 0.8667,
+          "mrr": 0.8778
+        },
+        "hard": {
+          "recall_at_10": 1.0,
+          "mrr": 0.8929
+        }
+      }
+    },
+    "hybrid": {
+      "name": "Hybrid (BM25 + Vector)",
+      "recall_at_10": 0.6923,
+      "mrr": 0.8504,
+      "latency_ms": 173.3,
+      "p95_latency_ms": 193.7,
+      "by_difficulty": {
+        "easy": {
+          "recall_at_10": 1.0,
+          "mrr": 1.0
+        },
+        "medium": {
+          "recall_at_10": 0.4667,
+          "mrr": 0.8111
+        },
+        "hard": {
+          "recall_at_10": 0.7143,
+          "mrr": 0.7857
+        }
+      },
+      "note": "BM25 is limited by small corpus (40 docs)"
+    },
+    "advanced_multi_stage": {
+      "name": "Advanced Multi-Stage Retriever",
+      "recall_at_10": 0.885,
+      "mrr": 0.9103,
+      "latency_ms": 780.0,
+      "p95_latency_ms": 1202.3,
+      "by_difficulty": {
+        "easy": {
+          "recall_at_10": 1.0,
+          "mrr": 1.0
+        },
+        "medium": {
+          "recall_at_10": 0.7667,
+          "mrr": 0.8333
+        },
+        "hard": {
+          "recall_at_10": 0.9286,
+          "mrr": 0.9286
+        }
+      },
+      "note": "Query expansion + multi-stage retrieval with skill boosting"
+    }
+  }
+}

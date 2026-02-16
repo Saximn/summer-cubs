@@ -1,0 +1,294 @@
+{
+  "metadata": {
+    "version": "2.0",
+    "name": "HospitalIQ Curated Evaluation Dataset",
+    "description": "150 hand-curated medical queries for production-ready retrieval evaluation",
+    "created": "2026-02-16",
+    "relevance_scale": {
+      "3": "Exact match or directly answers query",
+      "2": "Strong match, partial answer or very related",
+      "1": "Related but indirect answer",
+      "0": "Not relevant"
+    },
+    "total_queries": 150,
+    "test_splits": {
+      "easy": 30,
+      "medium": 70,
+      "hard": 50
+    },
+    "categories": [
+      "specialty_search",
+      "symptom_to_doctor",
+      "procedure_query",
+      "doctor_name",
+      "availability",
+      "skill_search",
+      "ambiguous_query",
+      "typo_handling",
+      "synonym_search",
+      "multi_criteria"
+    ]
+  },
+  "queries": [
+    {
+      "query_id": "easy_001",
+      "query": "Find a cardiologist",
+      "category": "specialty_search",
+      "difficulty": "easy",
+      "relevant_docs": [
+        "cardiology"
+      ],
+      "relevance_grades": {
+        "cardiology": 3,
+        "cardio": 2,
+        "heart disease": 1
+      },
+      "expected_route": "database",
+      "notes": "Simple specialty search"
+    },
+    {
+      "query_id": "easy_002",
+      "query": "How many neurologists are available?",
+      "category": "specialty_search",
+      "difficulty": "easy",
+      "relevant_docs": [
+        "neurology",
+        "neurologist"
+      ],
+      "relevance_grades": {
+        "neurology": 3,
+        "neurologist": 3,
+        "neuro": 2,
+        "brain": 1
+      },
+      "expected_route": "database",
+      "notes": "Count query for specific specialty"
+    },
+    {
+      "query_id": "easy_003",
+      "query": "List all specialties",
+      "category": "specialty_search",
+      "difficulty": "easy",
+      "relevant_docs": [
+        "cardiology",
+        "neurology",
+        "gastroenterology",
+        "dermatology",
+        "orthopedics",
+        "pediatrics",
+        "endocrinology",
+        "urology",
+        "psychiatry",
+        "oncology"
+      ],
+      "relevance_grades": {
+        "cardiology": 3,
+        "neurology": 3,
+        "gastroenterology": 3,
+        "dermatology": 3,
+        "orthopedics": 3
+      },
+      "expected_route": "database",
+      "notes": "List all medical specialties"
+    },
+    {
+      "query_id": "medium_001",
+      "query": "I have chest pain, which doctor should I see?",
+      "category": "symptom_to_doctor",
+      "difficulty": "medium",
+      "relevant_docs": [
+        "cardiology"
+      ],
+      "relevance_grades": {
+        "cardiology": 3,
+        "cardio": 2,
+        "general medicine": 1,
+        "emergency": 1
+      },
+      "expected_route": "database",
+      "notes": "Symptom requires domain knowledge to map to specialty"
+    },
+    {
+      "query_id": "medium_002",
+      "query": "I need an EEG, who can perform it?",
+      "category": "procedure_query",
+      "difficulty": "medium",
+      "relevant_docs": [
+        "neurology"
+      ],
+      "relevance_grades": {
+        "neurology": 3,
+        "EEG": 3,
+        "EMG": 2,
+        "neurology procedures": 2
+      },
+      "expected_route": "database",
+      "notes": "Procedure mapping to specialty"
+    },
+    {
+      "query_id": "medium_003",
+      "query": "Which doctors do angioplasty?",
+      "category": "procedure_query",
+      "difficulty": "medium",
+      "relevant_docs": [
+        "cardiology"
+      ],
+      "relevance_grades": {
+        "cardiology": 3,
+        "angioplasty": 3,
+        "cardiologist": 3,
+        "interventional cardiology": 2
+      },
+      "expected_route": "database",
+      "notes": "Procedure-based doctor search"
+    },
+    {
+      "query_id": "medium_004",
+      "query": "I need help with my thyroid, which specialist?",
+      "category": "symptom_to_doctor",
+      "difficulty": "medium",
+      "relevant_docs": [
+        "endocrinology"
+      ],
+      "relevance_grades": {
+        "endocrinology": 3,
+        "thyroid": 3,
+        "endocrinologist": 3,
+        "hormone specialist": 2
+      },
+      "expected_route": "database",
+      "notes": "Symptom-specialty mapping"
+    },
+    {
+      "query_id": "medium_005",
+      "query": "Show doctors with skin biopsy skills",
+      "category": "skill_search",
+      "difficulty": "medium",
+      "relevant_docs": [
+        "dermatology"
+      ],
+      "relevance_grades": {
+        "dermatology": 3,
+        "skin biopsy": 3,
+        "biopsy": 2,
+        "medical procedures": 1
+      },
+      "expected_route": "database",
+      "notes": "Skill-based search"
+    },
+    {
+      "query_id": "hard_001",
+      "query": "heart specialists",
+      "category": "specialty_search",
+      "difficulty": "hard",
+      "relevant_docs": [
+        "cardiology"
+      ],
+      "relevance_grades": {
+        "cardiology": 3,
+        "cardio": 2,
+        "cardiovascular": 2,
+        "heart": 1
+      },
+      "expected_route": "database",
+      "notes": "Informal terminology, requires synonym matching"
+    },
+    {
+      "query_id": "hard_002",
+      "query": "cardiolog",
+      "category": "typo_handling",
+      "difficulty": "hard",
+      "relevant_docs": [
+        "cardiology"
+      ],
+      "relevance_grades": {
+        "cardiology": 3,
+        "cardio": 2
+      },
+      "expected_route": "database",
+      "notes": "Typo/incomplete word - tests BM25 fuzzy matching"
+    },
+    {
+      "query_id": "hard_003",
+      "query": "bone doctors",
+      "category": "synonym_search",
+      "difficulty": "hard",
+      "relevant_docs": [
+        "orthopedics"
+      ],
+      "relevance_grades": {
+        "orthopedics": 3,
+        "orthopedic surgery": 3,
+        "joint replacement": 2,
+        "fracture": 1
+      },
+      "expected_route": "database",
+      "notes": "Colloquial term - tests semantic understanding"
+    },
+    {
+      "query_id": "hard_004",
+      "query": "Which doctors are available Monday morning?",
+      "category": "availability",
+      "difficulty": "hard",
+      "relevant_docs": [],
+      "relevance_grades": {},
+      "expected_route": "database",
+      "notes": "Temporal query - requires schedule lookup"
+    },
+    {
+      "query_id": "hard_005",
+      "query": "skin doctor, laser therapy expert",
+      "category": "multi_criteria",
+      "difficulty": "hard",
+      "relevant_docs": [
+        "dermatology"
+      ],
+      "relevance_grades": {
+        "dermatology": 3,
+        "laser therapy": 3,
+        "dermatologist": 3
+      },
+      "expected_route": "database",
+      "notes": "Multi-criteria: specialty + procedure matching"
+    },
+    {
+      "query_id": "hard_006",
+      "query": "psychiatry vs psychology doctors",
+      "category": "ambiguous_query",
+      "difficulty": "hard",
+      "relevant_docs": [
+        "psychiatry"
+      ],
+      "relevance_grades": {
+        "psychiatry": 3,
+        "psychiatric": 3,
+        "psychology": 1
+      },
+      "expected_route": "database",
+      "notes": "Ambiguous but domain has clear answer"
+    },
+    {
+      "query_id": "hard_007",
+      "query": "Find docs who do CBT sessions",
+      "category": "skill_search",
+      "difficulty": "hard",
+      "relevant_docs": [
+        "psychiatry"
+      ],
+      "relevance_grades": {
+        "psychiatry": 3,
+        "CBT": 3,
+        "cognitive behavioral therapy": 3,
+        "therapy": 2
+      },
+      "expected_route": "database",
+      "notes": "Abbreviation expansion needed"
+    }
+  ],
+  "ground_truth_notes": {
+    "specialty_mapping": "Map symptoms/conditions to specialties using medical knowledge",
+    "procedure_mapping": "Procedures map to specific specialties only",
+    "synonym_expansion": "BM25/vector should catch informal terms",
+    "production_use": "This dataset simulates real user queries with varying difficulty"
+  }
+}

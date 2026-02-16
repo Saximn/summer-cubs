@@ -12,10 +12,11 @@ from langchain.chat_models import init_chat_model
 try:
     from database_utils import init_database, create_sql_toolkit, query_as_list, safe_query_as_list
     from vector_utils import (
-        init_embeddings, 
-        init_vector_store, 
-        add_texts_to_vector_store, 
-        create_search_tool
+        init_embeddings,
+        init_vector_store,
+        add_texts_to_vector_store,
+        create_search_tool,
+        create_sql_vector_search_tool,
     )
     from agent_utils import init_llm, create_agent, get_current_datetime, get_current_date, get_current_time
     from prompts import system_message, description, suffix
@@ -23,10 +24,11 @@ except ImportError:
     # Fallback for relative imports
     from .database_utils import init_database, create_sql_toolkit, query_as_list, safe_query_as_list
     from .vector_utils import (
-        init_embeddings, 
-        init_vector_store, 
-        add_texts_to_vector_store, 
-        create_search_tool
+        init_embeddings,
+        init_vector_store,
+        add_texts_to_vector_store,
+        create_search_tool,
+        create_sql_vector_search_tool,
     )
     from .agent_utils import init_llm, create_agent, get_current_datetime, get_current_date, get_current_time
     from .prompts import system_message, description, suffix
@@ -50,7 +52,8 @@ class LangGraphChatbot:
         model_name: str = "gpt-4o-mini",
         embedding_model: str = "text-embedding-3-small",
         vector_store_dir: str = "./chroma_langchain_db",
-        use_hybrid_retrieval: bool = False
+        use_hybrid_retrieval: bool = False,
+        use_sql_vector_retrieval: bool = False
     ):
         """Initialize the chatbot with database and AI models.
         
@@ -60,12 +63,14 @@ class LangGraphChatbot:
             embedding_model: Name of the embedding model
             vector_store_dir: Directory for vector store
             use_hybrid_retrieval: Whether to use hybrid BM25+vector retrieval (default: False)
+            use_sql_vector_retrieval: Whether to use SQL + vector + schedule-aware retrieval (default: False)
         """
         self.db_path = db_path
         self.model_name = model_name
         self.embedding_model = embedding_model
         self.vector_store_dir = vector_store_dir
         self.use_hybrid_retrieval = use_hybrid_retrieval
+        self.use_sql_vector_retrieval = use_sql_vector_retrieval
         
         # Initialize components
         self._setup_database()
@@ -140,8 +145,24 @@ class LangGraphChatbot:
         # Get SQL tools
         sql_tools = create_sql_toolkit(self.db, self.llm)
         
-        # Create retriever tool (hybrid or vector-only)
-        if self.use_hybrid_retrieval:
+        # Create retriever tool (SQL+vector, hybrid, or vector-only)
+        if self.use_sql_vector_retrieval:
+            try:
+                retriever_tool = create_sql_vector_search_tool(
+                    db_path=self.db_path,
+                    vector_store_dir=self.vector_store_dir,
+                    name="search_proper_nouns",
+                    description=description,
+                )
+                print("[OK] Using SQL + vector + schedule-aware retrieval")
+            except Exception as e:
+                print(f"[WARN] SQL+vector retrieval failed, falling back to vector-only: {e}")
+                retriever_tool = create_search_tool(
+                    self.vector_store,
+                    name="search_proper_nouns",
+                    description=description
+                )
+        elif self.use_hybrid_retrieval:
             try:
                 from vector_utils import create_hybrid_search_tool
                 retriever_tool = create_hybrid_search_tool(
@@ -210,39 +231,27 @@ class LangGraphChatbot:
     def _analyze_query(self, state: ChatbotState) -> ChatbotState:
         """Analyze the user query to determine if database access is needed."""
         user_query = state["user_query"]
+        query_lower = user_query.lower()
         
-        # Create a prompt to analyze if database is needed
-        analysis_prompt = ChatPromptTemplate.from_messages([
-            ("system", """
-You are an analyzer that determines if a user query requires database access.
-
-Respond with "YES" if the query:
-- Asks about specific medical data (doctors, patients, skills, specialties)
-- Requests counts, statistics, or specific information
-- Mentions medical procedures, conditions, or healthcare data
-- Asks "how many", "list", "find", "search" for medical information
-- Asks about current time, date, or datetime information
-- Needs to schedule appointments or time-related queries
-
-Respond with "NO" if the query:
-- Is a general greeting or conversation
-- Asks for definitions or explanations
-- Is about general medical knowledge (not specific data)
-- Is a casual question not requiring database lookup
-
-Query: {query}
-
-Answer with only YES or NO.
-"""),
-            ("user", "{query}")
-        ])
+        # First: Use keyword-based routing for efficiency (no LLM call for these)
+        database_keywords = [
+            "how many", "count", "list", "find", "search", "which", "who is",
+            "doctor", "physicians", "specialty", "specialties", "skill", "schedule",
+            "available", "appointment", "appointment time", "cardiolog", "neurolog",
+            "gastroenterolog", "dermatolog", "orthoped", "pediatric", "endocrinolog",
+            "urolog", "psychiatr", "oncolog", "procedure", "treatment", "diagnosis"
+        ]
         
-        # Get the analysis
-        analysis_chain = analysis_prompt | self.llm
-        result = analysis_chain.invoke({"query": user_query})
+        datetime_keywords = ["time", "date", "when", "hour", "morning", "afternoon", "evening"]
+        datetime_context = any(keyword in query_lower for keyword in datetime_keywords)
+        appointment_context = "appointment" in query_lower or "schedule" in query_lower
         
-        # Determine if database is needed
-        needs_database = "YES" in result.content.upper()
+        # Datetime queries are handled by datetime tools, not full database
+        if datetime_context and not appointment_context:
+            needs_database = False
+        else:
+            # Check if query has database keywords
+            needs_database = any(keyword in query_lower for keyword in database_keywords)
         
         state["needs_database"] = needs_database
         print(f"Query analysis: {'Database needed' if needs_database else 'General response'}")

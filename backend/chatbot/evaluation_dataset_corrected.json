@@ -1,0 +1,418 @@
+{
+  "metadata": {
+    "source": "aligned with actual database schema",
+    "specialties": [
+      "cardiology",
+      "dermatology",
+      "endocrinology",
+      "gastroenterology",
+      "neurology",
+      "oncology",
+      "orthopedics",
+      "pediatrics",
+      "psychiatry",
+      "urology"
+    ],
+    "skills": [
+      "CBT",
+      "EEG",
+      "EMG",
+      "angioplasty",
+      "arthroscopy",
+      "bone density scan",
+      "chemotherapy",
+      "colonoscopy",
+      "cystoscopy",
+      "developmental screening",
+      "echocardiogram",
+      "fracture fixation",
+      "immunizations",
+      "insulin therapy",
+      "joint replacement",
+      "laser therapy",
+      "liver biopsy",
+      "lumbar puncture",
+      "medication management",
+      "mole removal",
+      "prostate biopsy",
+      "psychiatric eval",
+      "radiation planning",
+      "skin biopsy",
+      "stress test",
+      "thyroid panels",
+      "tumor biopsy",
+      "upper endoscopy",
+      "urinalysis",
+      "well-child exam"
+    ],
+    "date_created": "2024"
+  },
+  "queries": [
+    {
+      "query": "Find a cardiologist",
+      "difficulty": "easy",
+      "relevance_grades": {
+        "cardiology": 3
+      }
+    },
+    {
+      "query": "I need a neurologist",
+      "difficulty": "easy",
+      "relevance_grades": {
+        "neurology": 3
+      }
+    },
+    {
+      "query": "Show dermatologists",
+      "difficulty": "easy",
+      "relevance_grades": {
+        "dermatology": 3
+      }
+    },
+    {
+      "query": "Where are the orthopedists",
+      "difficulty": "easy",
+      "relevance_grades": {
+        "orthopedics": 3
+      }
+    },
+    {
+      "query": "Who are the gastroenterologists",
+      "difficulty": "easy",
+      "relevance_grades": {
+        "gastroenterology": 3
+      }
+    },
+    {
+      "query": "pediatric doctors",
+      "difficulty": "easy",
+      "relevance_grades": {
+        "pediatrics": 3
+      }
+    },
+    {
+      "query": "endocrinology specialists",
+      "difficulty": "easy",
+      "relevance_grades": {
+        "endocrinology": 3
+      }
+    },
+    {
+      "query": "urologists",
+      "difficulty": "easy",
+      "relevance_grades": {
+        "urology": 3
+      }
+    },
+    {
+      "query": "psychiatrists in the system",
+      "difficulty": "easy",
+      "relevance_grades": {
+        "psychiatry": 3
+      }
+    },
+    {
+      "query": "oncology department",
+      "difficulty": "easy",
+      "relevance_grades": {
+        "oncology": 3
+      }
+    },
+    {
+      "query": "who does EEG",
+      "difficulty": "medium",
+      "relevance_grades": {
+        "EEG": 3,
+        "neurology": 2
+      }
+    },
+    {
+      "query": "angioplasty procedure doctors",
+      "difficulty": "medium",
+      "relevance_grades": {
+        "angioplasty": 3,
+        "cardiology": 2
+      }
+    },
+    {
+      "query": "CBT treatment providers",
+      "difficulty": "medium",
+      "relevance_grades": {
+        "CBT": 3,
+        "psychiatry": 2
+      }
+    },
+    {
+      "query": "colonoscopy specialists",
+      "difficulty": "medium",
+      "relevance_grades": {
+        "colonoscopy": 3,
+        "gastroenterology": 2
+      }
+    },
+    {
+      "query": "laser therapy available",
+      "difficulty": "medium",
+      "relevance_grades": {
+        "laser therapy": 3,
+        "dermatology": 2
+      }
+    },
+    {
+      "query": "who can do joint replacement",
+      "difficulty": "medium",
+      "relevance_grades": {
+        "joint replacement": 3,
+        "orthopedics": 2
+      }
+    },
+    {
+      "query": "arthroscopy surgery",
+      "difficulty": "medium",
+      "relevance_grades": {
+        "arthroscopy": 3,
+        "orthopedics": 2
+      }
+    },
+    {
+      "query": "chemotherapy treatment doctors",
+      "difficulty": "medium",
+      "relevance_grades": {
+        "chemotherapy": 3,
+        "oncology": 2
+      }
+    },
+    {
+      "query": "ultrasound imaging",
+      "difficulty": "medium",
+      "relevance_grades": {
+        "ultrasound": 3,
+        "pediatrics": 2
+      }
+    },
+    {
+      "query": "thyroid panel tests",
+      "difficulty": "medium",
+      "relevance_grades": {
+        "thyroid panels": 3,
+        "endocrinology": 2
+      }
+    },
+    {
+      "query": "stress test for heart",
+      "difficulty": "medium",
+      "relevance_grades": {
+        "stress test": 3,
+        "cardiology": 2
+      }
+    },
+    {
+      "query": "dermis examination",
+      "difficulty": "medium",
+      "relevance_grades": {
+        "skin biopsy": 2,
+        "dermatology": 3
+      }
+    },
+    {
+      "query": "cognitive behavioral therapy",
+      "difficulty": "medium",
+      "relevance_grades": {
+        "CBT": 3,
+        "psychiatry": 2
+      }
+    },
+    {
+      "query": "spinal cord imaging",
+      "difficulty": "medium",
+      "relevance_grades": {
+        "MRI": 2,
+        "neurology": 3
+      }
+    },
+    {
+      "query": "bone density scan",
+      "difficulty": "medium",
+      "relevance_grades": {
+        "bone density scan": 3,
+        "orthopedics": 2
+      }
+    },
+    {
+      "query": "bone doc",
+      "difficulty": "hard",
+      "relevance_grades": {
+        "orthopedics": 3
+      }
+    },
+    {
+      "query": "heart specialist",
+      "difficulty": "hard",
+      "relevance_grades": {
+        "cardiology": 3
+      }
+    },
+    {
+      "query": "skin doctor with laser",
+      "difficulty": "hard",
+      "relevance_grades": {
+        "dermatology": 3,
+        "laser therapy": 2
+      }
+    },
+    {
+      "query": "GI doctor",
+      "difficulty": "hard",
+      "relevance_grades": {
+        "gastroenterology": 3
+      }
+    },
+    {
+      "query": "therapist for depression",
+      "difficulty": "hard",
+      "relevance_grades": {
+        "psychiatry": 3,
+        "CBT": 2
+      }
+    },
+    {
+      "query": "cardiolog",
+      "difficulty": "hard",
+      "relevance_grades": {
+        "cardiology": 3
+      }
+    },
+    {
+      "query": "neuolog",
+      "difficulty": "hard",
+      "relevance_grades": {
+        "neurology": 3
+      }
+    },
+    {
+      "query": "dermotologist",
+      "difficulty": "hard",
+      "relevance_grades": {
+        "dermatology": 3
+      }
+    },
+    {
+      "query": "orthopadic",
+      "difficulty": "hard",
+      "relevance_grades": {
+        "orthopedics": 3
+      }
+    },
+    {
+      "query": "cardiac surgery",
+      "difficulty": "hard",
+      "relevance_grades": {
+        "cardiology": 3
+      }
+    },
+    {
+      "query": "nervous system doctor",
+      "difficulty": "hard",
+      "relevance_grades": {
+        "neurology": 3
+      }
+    },
+    {
+      "query": "bone and joint",
+      "difficulty": "hard",
+      "relevance_grades": {
+        "orthopedics": 3,
+        "joint replacement": 2
+      }
+    },
+    {
+      "query": "psychiatric eval needed",
+      "difficulty": "hard",
+      "relevance_grades": {
+        "psychiatry": 3,
+        "CBT": 2
+      }
+    },
+    {
+      "query": "tumor treatment center",
+      "difficulty": "hard",
+      "relevance_grades": {
+        "oncology": 3,
+        "chemotherapy": 2
+      }
+    },
+    {
+      "query": "next available cardiologist appointment",
+      "difficulty": "medium",
+      "relevance_grades": {
+        "cardiology": 3
+      }
+    },
+    {
+      "query": "soonest psychiatry appointment",
+      "difficulty": "medium",
+      "relevance_grades": {
+        "psychiatry": 3,
+        "CBT": 2
+      }
+    },
+    {
+      "query": "available for colonoscopy",
+      "difficulty": "medium",
+      "relevance_grades": {
+        "colonoscopy": 3,
+        "gastroenterology": 2
+      }
+    },
+    {
+      "query": "orthopedics appointment available soon",
+      "difficulty": "medium",
+      "relevance_grades": {
+        "orthopedics": 3
+      }
+    },
+    {
+      "query": "next available dermatologist for laser therapy",
+      "difficulty": "hard",
+      "relevance_grades": {
+        "dermatology": 3,
+        "laser therapy": 2
+      }
+    },
+    {
+      "query": "book a pediatric appointment soon",
+      "difficulty": "medium",
+      "relevance_grades": {
+        "pediatrics": 3
+      }
+    },
+    {
+      "query": "earliest urology appointment",
+      "difficulty": "medium",
+      "relevance_grades": {
+        "urology": 3
+      }
+    },
+    {
+      "query": "next available oncology visit",
+      "difficulty": "medium",
+      "relevance_grades": {
+        "oncology": 3
+      }
+    },
+    {
+      "query": "soonest endocrinology opening",
+      "difficulty": "medium",
+      "relevance_grades": {
+        "endocrinology": 3
+      }
+    },
+    {
+      "query": "schedule a neurology visit",
+      "difficulty": "medium",
+      "relevance_grades": {
+        "neurology": 3
+      }
+    }
+  ]
+}
